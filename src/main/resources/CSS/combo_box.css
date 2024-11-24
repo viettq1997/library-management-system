@@ -1,0 +1,41 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 20-11-2022, 18:20:19
+    Author     : PC
+*/
+
+.combo-box {
+    -fx-background-color: #dbdbdb;
+    -fx-text-fill: #02030A;
+}
+
+.combo-box:selected {
+    -fx-border-radius: 10px 10px 0px 0px;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #dbdbdb;
+    -fx-text-fill: #02030A;
+    -fx-border-radius: 0px 0px 10px 10px;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #969696;
+    -fx-border-radius: 0px 0px 10px 10px;
+}
+
+.combo-box .list-cell:selected {
+    -fx-background-color: #dbdbdb;
+    -fx-text-fill: #02030A;
+    -fx-border-radius: 0px 0px 10px 10px;
+}
+
+.combo-box .list-view {
+    -fx-background-color: #dfdddb;
+    -fx-border-color: #666666;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-radius: 0px 0px 10px 10px;
+}
