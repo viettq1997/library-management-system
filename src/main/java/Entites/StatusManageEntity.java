@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entites;
 
 import Models.StatusManage;
@@ -9,10 +5,6 @@ import db.*;
 import java.sql.*;
 import javafx.collections.*;
 
-/**
- *
- * @author PC
- */
 public class StatusManageEntity {
 
     public static Connection connection = null;

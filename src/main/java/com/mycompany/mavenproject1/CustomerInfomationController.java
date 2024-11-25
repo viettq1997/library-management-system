@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.mavenproject1;
 
 import Entites.AccountEntity;
@@ -9,25 +5,18 @@ import Models.Account;
 import Models.User;
 import java.net.URL;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
-/**
- * FXML Controller class
- *
- * @author PC
- */
 public class CustomerInfomationController implements Initializable {
 
     User user = User.getInstace();

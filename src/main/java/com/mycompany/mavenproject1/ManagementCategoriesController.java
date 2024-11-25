@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.mavenproject1;
 
 import Models.*;
@@ -21,17 +17,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-/**
- * FXML Controller class
- *
- * @author PC
- */
 public class ManagementCategoriesController implements Initializable {
 
     private Preferences prefs = Preferences.userRoot().node(this.getClass().getName());

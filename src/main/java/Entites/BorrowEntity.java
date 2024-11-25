@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entites;
 
 import Models.Account;
@@ -18,10 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import utils.DateUtil;
 
-/**
- *
- * @author PC
- */
 public class BorrowEntity {
 
     public static Connection connection = null;

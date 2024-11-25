@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Models;
 
 import javafx.beans.property.*;
 
-/**
- *
- * @author PC
- */
 public class StatusManage {
 
     private final IntegerProperty id;

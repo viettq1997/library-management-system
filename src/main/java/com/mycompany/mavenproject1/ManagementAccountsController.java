@@ -1,45 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.mavenproject1;
 
 import Models.*;
 import Entites.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.time.*;
 import java.time.format.*;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.prefs.Preferences;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
-import javafx.stage.*;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Duration;
-import javax.imageio.ImageIO;
 
-/**
- * FXML Controller class
- *
- * @author PC
- */
 public class ManagementAccountsController implements Initializable {
 
     @FXML

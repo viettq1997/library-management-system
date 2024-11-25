@@ -21,11 +21,6 @@ create table accounts (
     FOREIGN KEY (roleId) REFERENCES roles(id)
 );
 
-INSERT INTO accounts
-    (UID, avatar, username, password, full_name, gender, email, dob, mobile, status, roleId, createdAt, updatedAt)
-VALUES
-    ('82e3c116-29d5-4e87-a5c7-716ab8cfebc1', 'https://example.com/avatar.png', 'admin', 'password123', 'Admin', 1, 'admin@example.com', '1990-05-15', '0123456789', 1, 1, '2024-11-22', '2024-11-22');
-
 create table categories (
 	id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255),
@@ -102,11 +97,14 @@ create table borrow (
     FOREIGN KEY (statusId) REFERENCES status_borrow(id)
 );
 
-INSERT INTO
-
 INSERT INTO roles (name) VALUES ('Admin');
 INSERT INTO roles (name) VALUES ('Librarian');
 INSERT INTO roles (name) VALUES ('Reader');
+
+INSERT INTO accounts
+    (UID, avatar, username, password, full_name, gender, email, dob, mobile, status, roleId, createdAt, updatedAt)
+VALUES
+    ('82e3c116-29d5-4e87-a5c7-716ab8cfebc1', 'https://example.com/avatar.png', 'admin', 'password123', 'Admin', 1, 'admin@example.com', '1990-05-15', '0123456789', 1, 1, '2024-11-22', '2024-11-22');
 
 INSERT INTO status_manage (name) VALUES ('Importing');
 INSERT INTO status_manage (name) VALUES ('Imported');

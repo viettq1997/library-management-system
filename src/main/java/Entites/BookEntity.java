@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entites;
 
 import Models.*;
@@ -10,10 +6,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import javafx.collections.*;
 
-/**
- *
- * @author PC
- */
 public class BookEntity {
 
     public static Connection connection = null;
