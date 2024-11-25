@@ -3,10 +3,11 @@
 ## Set up
 
 ### In Intellij:
+- Download javafx sdk: https://gluonhq.com/products/javafx/ then un archive
 - Import javafx sdk: \
     File →
     Project Structure → Libraries → click on `+` symbol
-    (New project libraries) → choose ./externallib/javafx-sdk-17.0.13/lib → click `Ok`
+    (New project libraries) → choose pathToSdk/lib → click `Ok`
 - Set up sdk: \
   File →
   Project Structure → SDKs (under platform settings) → choose jdk17
