@@ -258,7 +258,7 @@ public class BorrowEntity {
             preparedStatement.setInt(2, obj.getAccountid().get());
             preparedStatement.setInt(3, obj.getBookid().get());
             preparedStatement.setInt(4, 1);
-            preparedStatement.setString(5, obj.getBorrowAt());
+            preparedStatement.setDate(5, DateUtil.convertStringToDate(obj.getBorrowAt()));
             preparedStatement.setString(6, obj.getRefundAt());
             System.out.println(obj.getAccountid() + "b = " + obj.getBookid());
 //          Execute Query, if insert successfull set flag equal true
@@ -350,7 +350,7 @@ public class BorrowEntity {
             connection = JDBCConnect.getJDBCConnection();
 //              Set hidden value
             preparedStatement = connection.prepareStatement(sql_borrow);
-            preparedStatement.setString(1, obj.getBorrowAt());
+            preparedStatement.setDate(1, DateUtil.convertStringToDate(obj.getBorrowAt()));
             preparedStatement.setString(2, obj.getRefundAt());
             preparedStatement.setInt(3, obj.getStatusId());
             preparedStatement.setInt(4, obj.getId());

@@ -5,13 +5,13 @@ create table roles (
 
 create table accounts (
 	id BIGSERIAL PRIMARY KEY,
-    UID VARCHAR(50),
+    UID VARCHAR(36),
     avatar VARCHAR(1000),
     username VARCHAR(64),
     password VARCHAR(20),
     full_name VARCHAR(64),
     gender int,
-    email VARCHAR(320),
+    email VARCHAR(50),
     dob DATE,
     mobile VARCHAR(11),
     status int,
@@ -23,14 +23,14 @@ create table accounts (
 
 create table categories (
 	id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(50),
     createdAt DATE,
 	updatedAt DATE
 );
 
 create table authors (
 	id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(50),
     dob DATE,
     sign_name VARCHAR(64),
     createdAt DATE,
@@ -39,8 +39,8 @@ create table authors (
 
 create table publishing (
 	id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    address VARCHAR(320),
+    name VARCHAR(100),
+    address VARCHAR(150),
     co_year DATE,
     createdAt DATE,
 	updatedAt DATE
@@ -48,12 +48,12 @@ create table publishing (
 
 create table books (
 	id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(320),
+    name VARCHAR(100),
     image VARCHAR(1000),
     co_year DATE,
     price FLOAT,
     quantity int,
-    description VARCHAR(255),
+    description VARCHAR(1000),
     categoryId int,
     authorId int,
     publishId int,
