@@ -262,7 +262,7 @@ public class CustomerEditInfomationController implements Initializable {
                         ConfirmPasswordController confirmPage = loader.getController();
                         if (confirmPage.Confirm()) {
                             try {
-                                if (AccountEntity.Update(acc)) {
+                                if (AccountEntity.Update(acc, null)) {
                                     user.setUserSession(acc.getUsername());
                                     switchToCustomerInfomation();
                                 }
@@ -295,7 +295,7 @@ public class CustomerEditInfomationController implements Initializable {
                     ConfirmPasswordController confirmPage = loader.getController();
                     if (confirmPage.Confirm()) {
                         try {
-                            if (AccountEntity.Update(acc)) {
+                            if (AccountEntity.Update(acc, null)) {
                                 user.setUserSession(acc.getUsername());
                                 switchToCustomerInfomation();
                             }

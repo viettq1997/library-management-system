@@ -6,7 +6,7 @@ import Models.Borrow;
 import Models.StatusBorrow;
 import java.sql.*;
 import db.*;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -200,20 +200,16 @@ public class BorrowEntity {
     }
 
     public static ObservableList<Borrow> Search(String name) {
-//      Call array list with type is Borrow
         ObservableList<Borrow> list = FXCollections.observableArrayList();
-//      Query SELECT in SQL
         String query = "Select bw.id,a.UID,bw.amount_of_pay, b.name as bookName,bw.borrowAt,bw.refundAt ,bw.time_out,sb.name as stautsName,a.username as accountName,bw.statusId,mb.accountId, mb.bookId,bw.manageId from borrow as bw\n"
                 + " join status_borrow as sb on bw.statusId = sb.id\n"
                 + " join manage_book as mb on bw.manageId = mb.id\n"
                 + " join accounts as a on mb.accountId = a.id\n"
                 + " join books as b on mb.bookId = b.id  where b.name like '%" + name + "%'";
         try {
-//          Connect to database and execute query
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareStatement(query);
             rs = preparedStatement.executeQuery();
-//          Call value in databse and set for list Borrow
             int i = 1;
             while (rs.next()) {
                 Borrow borrow = new Borrow();
@@ -235,7 +231,6 @@ public class BorrowEntity {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-//          Close databse at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
@@ -244,14 +239,11 @@ public class BorrowEntity {
     }
 
     public static boolean Add(Borrow obj) {
-        boolean flag = false;
-        BorrowEntity be = new BorrowEntity();
-//      Query insert in database with hidden value
         String query = "INSERT INTO borrow (borrowAt, time_out, refundAt, amount_of_pay, manageId, statusId) VALUES (?, ?, ?, ? ,? ,?)";
         String sql_manage_lib = "Insert into manage_book(price_per_book, accountId, bookId, statusId , createdAt, updatedAt) values(?,?,?,?,?,?)";
-
+        long milis = System.currentTimeMillis();
+        Date preDate = new Date(milis);
         try {
-//          Connect to database and set hidden value
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareStatement(sql_manage_lib);
             preparedStatement.setInt(1, 100);
@@ -259,31 +251,13 @@ public class BorrowEntity {
             preparedStatement.setInt(3, obj.getBookid().get());
             preparedStatement.setInt(4, 1);
             preparedStatement.setDate(5, DateUtil.convertStringToDate(obj.getBorrowAt()));
-            preparedStatement.setString(6, obj.getRefundAt());
+            preparedStatement.setDate(6, preDate);
             System.out.println(obj.getAccountid() + "b = " + obj.getBookid());
-//          Execute Query, if insert successfull set flag equal true
-            if (preparedStatement.executeUpdate() > 0) {
-
-                Alert alert = new Alert(Alert.AlertType.NONE);
-                alert.setAlertType(Alert.AlertType.INFORMATION);
-                alert.setTitle("Test Connection");
-                alert.setHeaderText(" Manager");
-                alert.setContentText("Added Successfully!");
-                alert.showAndWait();
+            if (preparedStatement.executeUpdate() <= 0) {
+                return false;
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-//          Close database at end
-            JDBCConnect.closeResultSet(rs);
-            JDBCConnect.closePreparedStatement(preparedStatement);
-            JDBCConnect.closeConnection(connection);
-        }
-//////////////////////////////////
-        try {
-//          Connect to database and set hidden value
-            int id;
-            id = newStatusID();
+
+            int id = newStatusID();
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, DateUtil.convertStringToDate(obj.getBorrowAt()));
@@ -292,19 +266,16 @@ public class BorrowEntity {
             preparedStatement.setFloat(4, obj.getAmount_of_pay());
             preparedStatement.setInt(5, id);
             preparedStatement.setInt(6, obj.getStatusId());
-//          Execute Query, if insert successfull set flag equal true
-            if (preparedStatement.executeUpdate() > 0) {
-                flag = true;
-            }
+
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         } finally {
-//          Close database at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
         }
-        return flag;
     }
 
     public static int newStatusID() throws SQLException {
@@ -320,9 +291,8 @@ public class BorrowEntity {
     }
 
     public static boolean Update(Borrow obj) {
-//        Query Update in Database with hidden value "?"
         String sql_borrow = "UPDATE borrow SET borrowAt = ?,refundAt = ?,statusId = ? WHERE (id = ?);";
-        String sql_manage_lib = "UPDATE manage_book SET  accountId = ?, bookId = ? WHERE (id = ?);";
+        String sql_manage_lib = "UPDATE manage_book SET accountId = ?, bookId = ? WHERE (id = ?);";
 
         try {
             System.out.println("Insert Manage_book");
@@ -332,69 +302,37 @@ public class BorrowEntity {
             preparedStatement.setInt(2, obj.getBookid().intValue());
             preparedStatement.setInt(3, obj.getManageId());
             preparedStatement.executeUpdate();
-            if (preparedStatement.executeUpdate() > 0) {
-//                Alert alert = new Alert(Alert.AlertType.NONE);
-//                alert.setAlertType(Alert.AlertType.INFORMATION);
-//                alert.setTitle("Test Connection");
-//                alert.setHeaderText("Status Manager");
-//                alert.setContentText("Updated Successfully!");
-//                alert.showAndWait();
-            } else {
-                return false;
-            }
-        } catch (SQLException | NullPointerException e) {
-        }
 
-        try {
-//          Connect to database
-            connection = JDBCConnect.getJDBCConnection();
-//              Set hidden value
             preparedStatement = connection.prepareStatement(sql_borrow);
             preparedStatement.setDate(1, DateUtil.convertStringToDate(obj.getBorrowAt()));
-            preparedStatement.setString(2, obj.getRefundAt());
+            preparedStatement.setDate(2, DateUtil.convertStringToDate(obj.getRefundAt()));
             preparedStatement.setInt(3, obj.getStatusId());
             preparedStatement.setInt(4, obj.getId());
-
-//          Execute Query, if update successfull set flag equal true
-            if (preparedStatement.executeUpdate() > 0) {
-                return true;
-            } else {
-                return false;
-            }
-
+            preparedStatement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         } finally {
-//          Close database at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
         }
-
-        return false;
     }
     
     public static boolean Delete(int id) {
-//      Query Delete in database with hidden value
-        String query = "DELETE FROM borrows WHERE id = ?";
+        String query = "DELETE FROM borrow WHERE id = ?";
 
         try {
-//          Connect to Database, set value for hidden value
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
 
-//          Execute Query, if delete successfull set flag equal true
-            if (preparedStatement.executeUpdate() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return preparedStatement.executeUpdate() > 0;
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-//          Close database at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
@@ -403,18 +341,6 @@ public class BorrowEntity {
         return false;
     }
 
-    private Date convertStringToDate(String date) {
-        String[] dateArray = date.split("-");
-        int year = Integer.parseInt(dateArray[1]);
-        int month = Integer.parseInt(dateArray[2]);
-        int day = Integer.parseInt(dateArray[3]);
-        LocalDate localdate = LocalDate.of(year, month, day);
-        Date newDate = Date.valueOf(localdate);
-
-        return newDate;
-    }
-
-    //lay id tu cac bang da chon
     public static int selectAccountIndex(ComboBox txtAccount) {
         ArrayList<Integer> list = new ArrayList<>();
         int accountID = 0;
@@ -483,7 +409,7 @@ public class BorrowEntity {
     public static void data_Status(ComboBox<StatusBorrow> txtStatus) {
         try {
             connection = JDBCConnect.getJDBCConnection();
-            preparedStatement = connection.prepareCall("SELECT * FROM status_borrow;");
+            preparedStatement = connection.prepareCall("SELECT * FROM status_borrow");
             rs = preparedStatement.executeQuery();
             ObservableList<StatusBorrow> list = FXCollections.observableArrayList();
             while (rs.next()) {
@@ -500,7 +426,7 @@ public class BorrowEntity {
     public static void data_Books(ComboBox<Book> txtBook) {
         try {
             connection = JDBCConnect.getJDBCConnection();
-            preparedStatement = connection.prepareCall("SELECT * FROM books;");
+            preparedStatement = connection.prepareCall("SELECT * FROM books");
             rs = preparedStatement.executeQuery();
             ObservableList<Book> list = FXCollections.observableArrayList();
             while (rs.next()) {
@@ -510,14 +436,14 @@ public class BorrowEntity {
                 list.add(book);
             }
             txtBook.setItems(list);
-        } catch (SQLException | NullPointerException ex) {
+        } catch (SQLException | NullPointerException ignored) {
         }
     }
 
     public static void data_Account(ComboBox<Account> txtAccount) {
         try {
             connection = JDBCConnect.getJDBCConnection();
-            preparedStatement = connection.prepareCall("SELECT * FROM accounts;");
+            preparedStatement = connection.prepareCall("SELECT * FROM accounts where status = 1");
             rs = preparedStatement.executeQuery();
             ObservableList<Account> list = FXCollections.observableArrayList();
             while (rs.next()) {

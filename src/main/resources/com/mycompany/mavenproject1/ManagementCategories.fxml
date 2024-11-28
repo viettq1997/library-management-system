@@ -52,7 +52,7 @@
                               <Button fx:id="btnSave" layoutX="29.0" layoutY="260.0" mnemonicParsing="false" onAction="#BtnSaveClick" prefHeight="30.0" prefWidth="85.0" styleClass="button_success" text="Save" />
                               <TextField fx:id="txtId" disable="true" editable="false" layoutX="131.0" layoutY="37.0" prefHeight="26.0" prefWidth="300.0" />
                               <Button fx:id="btnDelete" layoutX="142.0" layoutY="260.0" mnemonicParsing="false" onAction="#BtnDeleteClick" prefHeight="30.0" prefWidth="85.0" styleClass="button_danger" stylesheets="@../../../CSS/button.css" text="Delete" />
-                              <Button fx:id="btnReset" layoutX="255.0" layoutY="260.0" mnemonicParsing="false" onAction="#ResetFeild" prefHeight="30.0" prefWidth="85.0" styleClass="button_primary" stylesheets="@../../../CSS/button.css" text="Reset" />
+                              <Button fx:id="btnReset" layoutX="255.0" layoutY="260.0" mnemonicParsing="false" onAction="#ResetField" prefHeight="30.0" prefWidth="85.0" styleClass="button_primary" stylesheets="@../../../CSS/button.css" text="Reset" />
                               <Label layoutX="37.0" layoutY="192.0" text="Updated At">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
@@ -95,7 +95,7 @@
                                     <TableColumn fx:id="colUpdatedAt" minWidth="112.0" prefWidth="250.0" text="Updated At" />
                                  </columns>
                               </TableView>
-                              <Button fx:id="btnRefesh" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#RefeshData" prefHeight="30.0" prefWidth="100.0" styleClass="button_danger" stylesheets="@../../../CSS/button.css" text="Refesh" />
+                              <Button fx:id="btnRefesh" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#RefreshData" prefHeight="30.0" prefWidth="100.0" styleClass="button_danger" stylesheets="@../../../CSS/button.css" text="Refesh" />
                               <TextField fx:id="txtSearch" layoutX="600.0" layoutY="7.0" onKeyReleased="#BtnSearchClick" prefHeight="30.0" prefWidth="200.0" promptText="Search a name" style="-fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-background-radius: 2em;" />
                               <Button fx:id="btnSearch" layoutX="812.0" layoutY="7.0" mnemonicParsing="false" onAction="#BtnSearchClick" prefHeight="30.0" prefWidth="50.0" styleClass="button_primary" text="Find" />
                            </children>

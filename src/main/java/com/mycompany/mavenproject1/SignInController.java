@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class SignInController implements Initializable {
 
@@ -77,7 +78,7 @@ public class SignInController implements Initializable {
             String password = acc.getPassword();
             String role = acc.getRoleName();
 
-            if (password.equals(inpPassword)) {
+            if (password.equals(DigestUtils.md5Hex(inpPassword))) {
 
                 user.setUserSession(inpUsername);
 

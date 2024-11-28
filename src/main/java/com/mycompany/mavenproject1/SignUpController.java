@@ -11,6 +11,8 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.UUID;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -221,9 +223,8 @@ public class SignUpController implements Initializable {
     @FXML
     private void SignUp() {
         Role role = RoleEntity.GetOneByName("Reader");
-        ObservableList<Account> accounts = AccountEntity.GetAccountByRole(role.getId());
 
-        String UID = role.getName() + accounts.size();
+        String UID = UUID.randomUUID().toString();
         String username = txtUsername.getText();
         String hidePass = passPassword.getText();
         String showPass = txtPassword.getText();
@@ -259,7 +260,7 @@ public class SignUpController implements Initializable {
                     alert.setDialogPane(loader.load());
                     MessageController mc = loader.getController();
                     mc.setMessage("Signup Successfully! And Login again!");
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
 
                 alert.showAndWait();

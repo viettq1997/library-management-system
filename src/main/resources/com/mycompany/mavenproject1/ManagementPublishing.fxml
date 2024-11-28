@@ -48,7 +48,7 @@
                                     <TableColumn fx:id="colUpdatedAt" minWidth="112.0" prefWidth="150.0" text="Updated At" />
                                  </columns>
                               </TableView>
-                              <Button fx:id="btnRefesh" layoutX="16.0" layoutY="7.0" mnemonicParsing="false" onAction="#RefeshData" prefHeight="30.0" prefWidth="100.0" styleClass="button_danger" stylesheets="@../../../CSS/button.css" text="Refesh" />
+                              <Button fx:id="btnRefesh" layoutX="16.0" layoutY="7.0" mnemonicParsing="false" onAction="#RefreshData" prefHeight="30.0" prefWidth="100.0" styleClass="button_danger" stylesheets="@../../../CSS/button.css" text="Refesh" />
                               <TextField fx:id="txtSearch" layoutX="643.0" layoutY="10.0" onInputMethodTextChanged="#Search" onKeyReleased="#Search" prefHeight="30.0" prefWidth="200.0" promptText="Search" style="-fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-background-radius: 2em;" />
                               <Button fx:id="btnSearch" layoutX="855.0" layoutY="10.0" mnemonicParsing="false" onAction="#Search" prefHeight="30.0" prefWidth="50.0" styleClass="button_primary" text="Find" />
                            </children>
@@ -99,7 +99,7 @@
                               <Label fx:id="errorAddress" layoutX="131.0" layoutY="215.0" styleClass="error" text="Cannot be null" visible="false" />
                               <Button fx:id="btnSave" layoutX="29.0" layoutY="260.0" mnemonicParsing="false" onAction="#BtnSaveClick" prefHeight="30.0" prefWidth="85.0" styleClass="button_success" text="Save" />
                               <Button fx:id="btnDelete" layoutX="142.0" layoutY="260.0" mnemonicParsing="false" onAction="#BtnDeleteClick" prefHeight="30.0" prefWidth="85.0" styleClass="button_danger" stylesheets="@../../../CSS/button.css" text="Delete" />
-                              <Button fx:id="btnReset" layoutX="255.0" layoutY="260.0" mnemonicParsing="false" onAction="#ResetFeild" prefHeight="30.0" prefWidth="85.0" styleClass="button_primary" stylesheets="@../../../CSS/button.css" text="Reset" />
+                              <Button fx:id="btnReset" layoutX="255.0" layoutY="260.0" mnemonicParsing="false" onAction="#ResetField" prefHeight="30.0" prefWidth="85.0" styleClass="button_primary" stylesheets="@../../../CSS/button.css" text="Reset" />
                            </children>
                            <padding>
                               <Insets bottom="20.0" left="30.0" right="20.0" top="50.0" />

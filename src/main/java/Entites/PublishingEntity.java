@@ -3,6 +3,8 @@ package Entites;
 import static Entites.PublishingEntity.connection;
 import static Entites.PublishingEntity.preparedStatement;
 import static Entites.PublishingEntity.rs;
+import static utils.DateUtil.convertStringToDate;
+
 import Models.Publishing;
 import java.sql.*;
 import db.*;
@@ -172,18 +174,7 @@ public class PublishingEntity {
             preparedStatement.setDate(4, preDate);
             preparedStatement.setDate(5, preDate);
 
-//          if add sucess reset all feild and reset table view, all feild else show message fail
-            if (preparedStatement.executeUpdate() > 0) {
-
-                System.out.println("Add successfully !");
-
-                return true;
-            } else {
-                System.out.println("Add fail !");
-
-                return false;
-            }
-
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -205,16 +196,7 @@ public class PublishingEntity {
             preparedStatement.setInt(5, obj.getId());
             System.out.println(preparedStatement.getResultSet());
 
-//          if update sucess reset all feild and reset table view, all feild else show message fail
-            if (preparedStatement.executeUpdate() > 0) {
-                System.out.println("Updated Successfully !");
-
-                return true;
-            } else {
-                System.out.println("Updated Fail !");
-
-                return false;
-            }
+            return preparedStatement.executeUpdate() > 0;
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -230,30 +212,11 @@ public class PublishingEntity {
             preparedStatement = connection.prepareCall(sql);
             preparedStatement.setInt(1, id);
 
-            if (preparedStatement.executeUpdate() > 0) {
-                System.out.println("Delete Successfully !");
-
-                return true;
-            } else {
-                System.out.println("Delete Faild !");
-
-                return false;
-            }
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
         return false;
-    }
-
-    private static Date convertStringToDate(String date) {
-        String[] dateArray = date.split("-");
-        int year = Integer.parseInt(dateArray[0]);
-        int month = Integer.parseInt(dateArray[1]);
-        int day = Integer.parseInt(dateArray[2]);
-        LocalDate localdate = LocalDate.of(year, month, day);
-        Date newDate = Date.valueOf(localdate);
-
-        return newDate;
     }
 }

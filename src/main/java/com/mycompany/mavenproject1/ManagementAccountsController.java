@@ -8,6 +8,7 @@ import java.net.URL;
 import java.time.*;
 import java.time.format.*;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -16,10 +17,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class ManagementAccountsController implements Initializable {
 
@@ -218,10 +222,9 @@ public class ManagementAccountsController implements Initializable {
                     }
 
                     txtUID.setText(table.getItems().get(myIndex).getUID());
+                    txtUsername.setDisable(true);
                     txtUsername.setText(table.getItems().get(myIndex).getUsername());
-//                    av = getToFile(table.getItems().get(myIndex).getAvatar());
-//                    txtAvatar.setText(table.getItems().get(myIndex).getAvatar());
-                    txtPassword.setText(table.getItems().get(myIndex).getPassword());
+                    txtPassword.setText("");
                     txtFullname.setText(table.getItems().get(myIndex).getFull_name());
                     txtEmail.setText(table.getItems().get(myIndex).getEmail());
                     txtMobile.setText(table.getItems().get(myIndex).getMobile());
@@ -230,7 +233,8 @@ public class ManagementAccountsController implements Initializable {
 
                     CheckUID();
                     CheckRole();
-                    Validated();
+                    errorPassword.setVisible(false);
+                    btnSave.setDisable(false);
                 }
             });
             return myRow;
@@ -246,45 +250,13 @@ public class ManagementAccountsController implements Initializable {
         clock.play();
     }
 
-//    @FXML
-//    private void ChooseAnImage(ActionEvent event) throws IOException {
-//        Stage stage = (Stage) ap.getScene().getWindow();
-////      create a box for choose image
-//        FileChooser fc = new FileChooser();
-//        
-//        fc.getExtensionFilters().add(new ExtensionFilter("JPG Files", "*.jpg"));
-//        File f = fc.showOpenDialog(stage);
-//        
-//        if (f != null) {
-//            txtAvatar.setText(f.getPath());
-//            av = new Image(f.toURI().toString());
-//            System.out.println("---------------------------------------------------" + f.toURI().toString());
-//            imgAvatar.setImage(av);
-//            Validated();
-//        }
-//    }
-//    @FXML
-//    public static void saveToFile(Image image, String imgName) {
-//        File outputFile = new File("D:\\Documents\\NetBeansProjects\\Library-management-system\\src\\main\\resources\\Avatar\\" + imgName);
-//        BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
-//        try {
-//            ImageIO.write(bImage, "jpg", outputFile);
-//        } catch (IOException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//    public Image getToFile(String imgName) {
-//        Image img = new Image("file:/D:/Documents/NetBeansProjects/Library-management-system/src/main/resources/Avatar/" + imgName);
-//        return img;
-//    }
     @FXML
     public void BtnSaveClick() {
-        Validated();
         FormatFullName();
 
         Account a = new Account();
         String UID = txtUID.getText();
-        String password = txtPassword.getText();
+        String password = DigestUtils.md5Hex(txtPassword.getText());
         String userName = txtUsername.getText();
         String fullName = txtFullname.getText();
         Gender gender = boxGender.getValue();
@@ -294,15 +266,12 @@ public class ManagementAccountsController implements Initializable {
         String mobile = txtMobile.getText();
         String imgName = UID + ".jpg";
 
-//      Call Alert box
         Alert alert = new Alert(Alert.AlertType.NONE);
 
-//      inpId is empty we create new categories else we update this
         if (UID.isEmpty()) {
             if (AccountEntity.GetAccountByUsername(userName) == null) {
-                ObservableList<Account> accounts = AccountEntity.GetAccountByRole(role.getId());
 
-                UID = role.getName() + accounts.size();
+                UID = UUID.randomUUID().toString();
                 a.setUID(UID);
                 a.setAvatar(imgName);
                 a.setPassword(password);
@@ -316,17 +285,13 @@ public class ManagementAccountsController implements Initializable {
                 a.setAvatar(UID + ".jpg");
                 a.setRoleId(role.getId());
 
-//              if add success, show a box with message "Added Successfully!" else show message "Added Fail!"
                 if (AccountEntity.Add(a)) {
-//                    saveToFile(av, UID + ".jpg");
-//                  set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.INFORMATION);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Accounts Manager");
                     alert.setContentText("Added Successfully!");
                     alert.showAndWait();
                 } else {
-//                  set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Accounts Manager");
@@ -335,7 +300,6 @@ public class ManagementAccountsController implements Initializable {
                 }
 
             } else {
-//              set titile, header, content for alert box
                 alert.setAlertType(Alert.AlertType.ERROR);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Accounts Manager");
@@ -353,59 +317,25 @@ public class ManagementAccountsController implements Initializable {
             a.setDob(date);
             a.setMobile(mobile);
             a.setRoleId(role.getId());
-            if (AccountEntity.GetAccountByUID(UID).getUsername().equals(a.getUsername())) {
-//              if update success, show a box with message "Updated Successfully!" else show message "Updated Fail!"
-                if (AccountEntity.GetAccountByUsername(a.getUsername()) == null) {
-                    if (AccountEntity.Update(a)) {
-                        if (a.getUID().equals(UID)) {
-                            sessionUsername.setText(userName);
-                        }
-//                saveToFile(av, UID + ".jpg");
-//                  set titile, header, content for alert box
-                        alert.setAlertType(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Test Connection");
-                        alert.setHeaderText("Accounts Manager");
-                        alert.setContentText("Updated Successfully!");
-                        alert.showAndWait();
-                    } else {
-//                  set titile, header, content for alert box
-                        alert.setAlertType(Alert.AlertType.ERROR);
-                        alert.setTitle("Test Connection");
-                        alert.setHeaderText("Accounts Manager");
-                        alert.setContentText("Updated Fail!");
-                        alert.showAndWait();
-                    }
-                } else {
-//              set titile, header, content for alert box
-                    alert.setAlertType(Alert.AlertType.ERROR);
-                    alert.setTitle("Test Connection");
-                    alert.setHeaderText("Accounts Manager");
-                    alert.setContentText("This username is exists!");
-                    alert.showAndWait();
+            Account account = AccountEntity.GetAccountByUID(UID);
+            if (AccountEntity.Update(a, account)) {
+                if (a.getUID().equals(UID)) {
+                    sessionUsername.setText(userName);
                 }
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setTitle("Test Connection");
+                alert.setHeaderText("Accounts Manager");
+                alert.setContentText("Updated Successfully!");
+                alert.showAndWait();
             } else {
-                if (AccountEntity.Update(a)) {
-                    if (a.getUID().equals(UID)) {
-                        sessionUsername.setText(userName);
-                    }
-//                saveToFile(av, UID + ".jpg");
-//                  set titile, header, content for alert box
-                    alert.setAlertType(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Test Connection");
-                    alert.setHeaderText("Accounts Manager");
-                    alert.setContentText("Updated Successfully!");
-                    alert.showAndWait();
-                } else {
-//                  set titile, header, content for alert box
-                    alert.setAlertType(Alert.AlertType.ERROR);
-                    alert.setTitle("Test Connection");
-                    alert.setHeaderText("Accounts Manager");
-                    alert.setContentText("Updated Fail!");
-                    alert.showAndWait();
-                }
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setTitle("Test Connection");
+                alert.setHeaderText("Accounts Manager");
+                alert.setContentText("Updated Fail!");
+                alert.showAndWait();
             }
         }
-        RefeshData();
+        RefreshData();
     }
 
     @FXML
@@ -416,7 +346,6 @@ public class ManagementAccountsController implements Initializable {
         table.setItems(accounts);
         colIndex.setCellValueFactory(f -> f.getValue().indexProperty().asString());
         colUID.setCellValueFactory(f -> f.getValue().UIDProperty());
-//        colAvatar.setCellValueFactory(f -> f.getValue().avatarProperty());
         colUsername.setCellValueFactory(f -> f.getValue().usernameProperty());
         colPassword.setCellValueFactory(f -> f.getValue().passwordProperty());
         colFullname.setCellValueFactory(f -> f.getValue().full_nameProperty());
@@ -453,9 +382,8 @@ public class ManagementAccountsController implements Initializable {
 
                     txtUID.setText(table.getItems().get(myIndex).getUID());
                     txtUsername.setText(table.getItems().get(myIndex).getUsername());
-//                    av = getToFile(table.getItems().get(myIndex).getAvatar());
-//                    txtAvatar.setText(table.getItems().get(myIndex).getAvatar());
-                    txtPassword.setText(table.getItems().get(myIndex).getPassword());
+                    String password = table.getItems().get(myIndex).getPassword();
+                    txtPassword.setText(password);
                     txtFullname.setText(table.getItems().get(myIndex).getFull_name());
                     txtEmail.setText(table.getItems().get(myIndex).getEmail());
                     txtMobile.setText(table.getItems().get(myIndex).getMobile());
@@ -464,7 +392,6 @@ public class ManagementAccountsController implements Initializable {
 
                     CheckUID();
                     CheckRole();
-                    Validated();
                 }
             });
             return myRow;
@@ -473,16 +400,12 @@ public class ManagementAccountsController implements Initializable {
 
     @FXML
     public void BtnDeleteClick() {
-//      Call id at id feild
         String UID = txtUID.getText();
 
-//      Call Alert box
         Alert alert = new Alert(Alert.AlertType.NONE);
 
-//      delete data for database, if success show message "Deleted successfully !" else show message "Delete Fail !"
         if (AccountEntity.Delete(UID)) {
 
-//          set titile, header, content for alert box
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setTitle("Test Connection");
             alert.setHeaderText("Accounts Manager");
@@ -491,7 +414,6 @@ public class ManagementAccountsController implements Initializable {
 
         } else {
 
-//          set titile, header, content for alert box
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setTitle("Test Connection");
             alert.setHeaderText("Accounts Manager");
@@ -500,18 +422,19 @@ public class ManagementAccountsController implements Initializable {
 
         }
 
-        RefeshData();
+        RefreshData();
     }
 
     @FXML
-    public void RefeshData() {
-        ResetFeild();
+    public void RefreshData() {
+        ResetField();
         table();
     }
 
     @FXML
-    public void ResetFeild() {
+    public void ResetField() {
         txtUID.setText("");
+        txtUsername.setDisable(false);
         txtUsername.setText("");
         txtPassword.setText("");
         txtFullname.setText("");
@@ -523,7 +446,6 @@ public class ManagementAccountsController implements Initializable {
         txtCreatedAt.setText("");
         txtUpdatedAt.setText("");
         txtSearch.setText("");
-//        txtAvatar.setText("");
 
         errorUsername.setVisible(false);
         errorPassword.setVisible(false);
@@ -533,35 +455,24 @@ public class ManagementAccountsController implements Initializable {
         errorEmail.setVisible(false);
         errorDob.setVisible(false);
         errorMobile.setVisible(false);
-//        errorAvatar.setVisible(false);
 
         CheckUID();
     }
 
     public void CheckUID() {
-//      get value of UID feild
         String UID = txtUID.getText();
 //      Set button delete disable when UID is empty else unset disable
-        if (UID.isEmpty()) {
-            btnDelete.setDisable(true);
-        } else {
-            btnDelete.setDisable(false);
-        }
+        btnDelete.setDisable(UID.isEmpty());
     }
 
     public void CheckRole() {
-//      get value of role combo box
         Role role = boxRole.getValue();
-//      Set button delete disable when UID is empty else unset disable
-        if (role.getId() == 1) {
-            btnDelete.setDisable(true);
-        } else {
-            btnDelete.setDisable(false);
-        }
+        btnDelete.setDisable(role.getId() == 1);
     }
 
     @FXML
-    private void Validated() {
+    private void Validated(KeyEvent event) {
+        Node source = (Node) event.getSource();
         boolean flag = false;
         String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=\\S+$).{8,20}$";
         String MOBILE_PATTERN = "^\\d{10}$";
@@ -574,21 +485,17 @@ public class ManagementAccountsController implements Initializable {
         String email = txtEmail.getText();
         LocalDate dob = txtDob.getValue();
         String mobile = txtMobile.getText();
-//        String avatar = txtAvatar.getText();
-//
         if (username.isEmpty() || username.length() > 64) {
             errorUsername.setVisible(true);
             flag = true;
 
-//            return false;
         } else {
             errorUsername.setVisible(false);
         }
-
-        if (password.isEmpty() || !password.matches(PASSWORD_PATTERN)) {
+        TextField textField = (TextField) source;
+        if (textField == txtPassword && (password.isEmpty() || !password.matches(PASSWORD_PATTERN))) {
             errorPassword.setVisible(true);
             flag = true;
-//            return false;
         } else {
             errorPassword.setVisible(false);
         }
@@ -597,7 +504,6 @@ public class ManagementAccountsController implements Initializable {
             errorFullname.setVisible(true);
             flag = true;
 
-//            return false;
         } else {
             errorFullname.setVisible(false);
         }
@@ -606,7 +512,6 @@ public class ManagementAccountsController implements Initializable {
             errorGender.setVisible(true);
             flag = true;
 
-//            return false;
         } else {
             errorGender.setVisible(false);
         }
@@ -615,7 +520,6 @@ public class ManagementAccountsController implements Initializable {
             errorRole.setVisible(true);
             flag = true;
 
-//            return false;
         } else {
             errorRole.setVisible(false);
         }
@@ -624,7 +528,6 @@ public class ManagementAccountsController implements Initializable {
             errorEmail.setVisible(true);
             flag = true;
 
-//            return false;
         } else {
             errorEmail.setVisible(false);
         }
@@ -633,7 +536,6 @@ public class ManagementAccountsController implements Initializable {
             errorDob.setVisible(true);
             flag = true;
 
-//            return false;
         } else {
             errorDob.setVisible(false);
         }
@@ -642,19 +544,10 @@ public class ManagementAccountsController implements Initializable {
             errorMobile.setVisible(true);
 
             flag = true;
-//            return false;
         } else {
             errorMobile.setVisible(false);
         }
 
-//        if (avatar.isEmpty() || avatar == null) {
-//            errorAvatar.setVisible(true);
-//            flag = false;
-//
-////            return false;
-//        } else {
-//            errorAvatar.setVisible(false);
-//        }
         btnSave.setDisable(flag);
     }
 

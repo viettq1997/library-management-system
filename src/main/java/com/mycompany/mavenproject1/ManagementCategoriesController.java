@@ -299,7 +299,7 @@ public class ManagementCategoriesController implements Initializable {
             }
         }
 
-        RefeshData();
+        RefreshData();
     }
 
     public void BtnDeleteClick() {
@@ -338,7 +338,7 @@ public class ManagementCategoriesController implements Initializable {
             alert.showAndWait();
         }
 
-        RefeshData();
+        RefreshData();
     }
 
     public void CheckInputName() {
@@ -379,12 +379,12 @@ public class ManagementCategoriesController implements Initializable {
         txtName.setText(newInpName);
     }
 
-    public void RefeshData() {
-        ResetFeild();
+    public void RefreshData() {
+        ResetField();
         table();
     }
 
-    public void ResetFeild() {
+    public void ResetField() {
         txtId.setText("");
         txtName.setText("");
         txtCreatedAt.setText("");

@@ -213,7 +213,7 @@ public class ManagementBorrowingController implements Initializable {
         } catch (RuntimeException r) {
         }
 
-        RefeshData();
+        RefreshData();
     }
 
     @FXML
@@ -238,11 +238,11 @@ public class ManagementBorrowingController implements Initializable {
             alert.setContentText("Deleted Fail!");
             alert.showAndWait();
         }
-        RefeshData();
+        RefreshData();
     }
 
     @FXML
-    private void ResetFeild() {
+    private void ResetField() {
         txtID.clear();
         txtTimeOut.clear();
         txtAccount.setValue(null);
@@ -263,8 +263,8 @@ public class ManagementBorrowingController implements Initializable {
     }
 
     @FXML
-    private void RefeshData() {
-        ResetFeild();
+    private void RefreshData() {
+        ResetField();
         table();
     }
 

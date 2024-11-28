@@ -3,12 +3,11 @@ package Entites;
 import Models.Account;
 import java.sql.*;
 import db.*;
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.commons.codec.digest.DigestUtils;
+
+import static utils.DateUtil.convertStringToDate;
 
 public class AccountEntity {
 
@@ -256,7 +255,7 @@ public class AccountEntity {
             preparedStatement.setString(1, acc.getUID());
             preparedStatement.setString(2, acc.getUsername());
             preparedStatement.setString(3, acc.getAvatar());
-            preparedStatement.setString(4, acc.getPassword());
+            preparedStatement.setString(4, DigestUtils.md5Hex(acc.getPassword()));
             preparedStatement.setString(5, acc.getFull_name());
             preparedStatement.setInt(6, acc.getGender());
             preparedStatement.setInt(7, acc.getGender());
@@ -266,11 +265,7 @@ public class AccountEntity {
             preparedStatement.setDate(11, preDate);
             preparedStatement.setDate(12, preDate);
 
-            if (preparedStatement.executeUpdate() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return preparedStatement.executeUpdate() > 0;
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -307,11 +302,7 @@ public class AccountEntity {
             preparedStatement.setDate(12, preDate);
             preparedStatement.setDate(13, preDate);
 
-            if (preparedStatement.executeUpdate() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return preparedStatement.executeUpdate() > 0;
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -324,12 +315,9 @@ public class AccountEntity {
         return false;
     }
 
-    public static boolean Update(Account acc) {
-        boolean flag = false;
-        AccountEntity am = new AccountEntity();
+    public static boolean Update(Account acc, Account existingAcc) {
         String query = "UPDATE accounts SET username = ?, password = ?, full_name = ?, gender = ?, email = ?, dob = ?, mobile = ?, roleId = ?, updatedAt = ?  WHERE UID = ?";
 
-//      set time at present with accuracy approximately is millis
         long milis = System.currentTimeMillis();
         java.sql.Date preDate = new java.sql.Date(milis);
         Date formatDob = convertStringToDate(acc.getDob());
@@ -338,7 +326,12 @@ public class AccountEntity {
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, acc.getUsername());
-            preparedStatement.setString(2, acc.getPassword());
+            if (acc.getPassword() != null && !acc.getPassword().isEmpty()) {
+                preparedStatement.setString(2, DigestUtils.md5Hex(acc.getPassword()));
+            } else {
+                preparedStatement.setString(2, existingAcc.getPassword());
+            }
+
             preparedStatement.setString(3, acc.getFull_name());
             preparedStatement.setInt(4, acc.getGender());
             preparedStatement.setString(5, acc.getEmail());
@@ -348,11 +341,7 @@ public class AccountEntity {
             preparedStatement.setDate(9, preDate);
             preparedStatement.setString(10, acc.getUID());
 
-            if (preparedStatement.executeUpdate() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -365,8 +354,6 @@ public class AccountEntity {
     }
 
     public static boolean Delete(String UID) {
-        boolean flag = false;
-
         String query = "UPDATE accounts SET status = ? WHERE UID = ?";
 
         try {
@@ -375,9 +362,7 @@ public class AccountEntity {
             preparedStatement.setInt(1, 0);
             preparedStatement.setString(2, UID);
 
-            if (preparedStatement.executeUpdate() > 0) {
-                flag = true;
-            }
+            return preparedStatement.executeUpdate() > 0;
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -386,18 +371,6 @@ public class AccountEntity {
             JDBCConnect.closeConnection(connection);
         }
 
-        return flag;
+        return false;
     }
-
-    private static Date convertStringToDate(String date) {
-        String[] dateArray = date.split("-");
-        int year = Integer.parseInt(dateArray[0]);
-        int month = Integer.parseInt(dateArray[1]);
-        int day = Integer.parseInt(dateArray[2]);
-        LocalDate localdate = LocalDate.of(year, month, day);
-        Date newDate = Date.valueOf(localdate);
-
-        return newDate;
-    }
-
 }

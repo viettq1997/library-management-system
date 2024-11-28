@@ -165,7 +165,7 @@ public class ManagementBooksController implements Initializable {
             System.out.println(e.getMessage());
         }
         initClock();
-        RefeshData();
+        RefreshData();
         InitItemsPublishBox();
         InitItemsCategoryBox();
         InitItemsAuthorBox();
@@ -252,7 +252,6 @@ public class ManagementBooksController implements Initializable {
         mg.getAccount().setId(accountId);
         mg.getStatus().setId(status.getId());
 
-//      Call Alert box
         Alert alert = new Alert(Alert.AlertType.NONE);
 
         if (bookId.isEmpty()) {
@@ -263,7 +262,6 @@ public class ManagementBooksController implements Initializable {
                     mg.getBook().setId(newBook.getId());
 
                     if (ManageBookEntity.Add(mg)) {
-//                      set titile, header, content for alert box
                         alert.setAlertType(Alert.AlertType.INFORMATION);
                         alert.setTitle("Test Connection");
                         alert.setHeaderText("Books Manager");
@@ -271,7 +269,6 @@ public class ManagementBooksController implements Initializable {
                         alert.showAndWait();
 
                     } else {
-//                      set titile, header, content for alert box
                         alert.setAlertType(Alert.AlertType.ERROR);
                         alert.setTitle("Test Connection");
                         alert.setHeaderText("Books Manager");
@@ -279,7 +276,6 @@ public class ManagementBooksController implements Initializable {
                         alert.showAndWait();
                     }
                 } else {
-//                  set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Books Manager");
@@ -303,14 +299,12 @@ public class ManagementBooksController implements Initializable {
                     if (BookEntity.Update(book)) {
 
                         if (ManageBookEntity.Update(mg)) {
-//                      set titile, header, content for alert box
                             alert.setAlertType(Alert.AlertType.INFORMATION);
                             alert.setTitle("Test Connection");
                             alert.setHeaderText("Books Manager");
                             alert.setContentText("Updated Successfully!");
                             alert.showAndWait();
                         } else {
-//                      set titile, header, content for alert box
                             alert.setAlertType(Alert.AlertType.ERROR);
                             alert.setTitle("Test Connection");
                             alert.setHeaderText("Books Manager");
@@ -318,7 +312,6 @@ public class ManagementBooksController implements Initializable {
                             alert.showAndWait();
                         }
                     } else {
-//                  set titile, header, content for alert box
                         alert.setAlertType(Alert.AlertType.ERROR);
                         alert.setTitle("Test Connection");
                         alert.setHeaderText("Books Manager");
@@ -326,7 +319,6 @@ public class ManagementBooksController implements Initializable {
                         alert.showAndWait();
                     }
                 } else {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Books Manager");
@@ -337,14 +329,12 @@ public class ManagementBooksController implements Initializable {
                 if (BookEntity.Update(book)) {
 
                     if (ManageBookEntity.Update(mg)) {
-//                      set titile, header, content for alert box
                         alert.setAlertType(Alert.AlertType.INFORMATION);
                         alert.setTitle("Test Connection");
                         alert.setHeaderText("Books Manager");
                         alert.setContentText("Updated Successfully!");
                         alert.showAndWait();
                     } else {
-//                      set titile, header, content for alert box
                         alert.setAlertType(Alert.AlertType.ERROR);
                         alert.setTitle("Test Connection");
                         alert.setHeaderText("Books Manager");
@@ -352,7 +342,6 @@ public class ManagementBooksController implements Initializable {
                         alert.showAndWait();
                     }
                 } else {
-//                  set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Books Manager");
@@ -363,56 +352,23 @@ public class ManagementBooksController implements Initializable {
 
         }
 
-        RefeshData();
+        RefreshData();
     }
 
     @FXML
     private void BtnDeleteClick() {
-        int accountId = AccountEntity.GetAccountByUsername(sessionUsername.getText()).getId();
         int bookId = Integer.parseInt(txtId.getText());
-        String bookName = txtName.getText();
-        String bookCoYear = txtCoyear.getValue().toString();
-        String price = txtPrice.getText();
-        String quantity = txtQuantity.getText();
-        String description = txtDescription.getText();
-        Category category = boxCategories.getValue();
-        Author author = boxAuthors.getValue();
-        Publishing publish = boxPublishs.getValue();
-        StatusManage status = boxStatus.getValue();
 
-        Book book = new Book();
-        book.setName(bookName);
-        book.setId(bookId);
-        book.setCoyear(bookCoYear);
-        book.setPrice(Float.valueOf(price));
-        book.setQuantity(0);
-        book.setDescription(description);
-        book.setCategoryId(category.getId());
-        book.setAuthorId(author.getId());
-        book.setPublishingId(publish.getId());
-
-        StatusManage sm = StatusManageEntity.GetStatusManageByName("Deleted");
-
-        ManageBook mg = new ManageBook();
-        mg.setPricePerBook(Float.valueOf(price));
-        mg.getAccount().setId(accountId);
-        mg.getBook().setId(bookId);
-        mg.getStatus().setId(sm.getId());
-
-//      Call Alert box
         Alert alert = new Alert(Alert.AlertType.NONE);
 
-        if (BookEntity.Update(book)) {
-
-            if (ManageBookEntity.Update(mg)) {
-//                      set titile, header, content for alert box
+        if (ManageBookEntity.Delete(bookId)) {
+            if (BookEntity.Delete(bookId)) {
                 alert.setAlertType(Alert.AlertType.INFORMATION);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Books Manager");
                 alert.setContentText("Deleted Successfully!");
                 alert.showAndWait();
             } else {
-//                      set titile, header, content for alert box
                 alert.setAlertType(Alert.AlertType.ERROR);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Books Manager");
@@ -420,7 +376,6 @@ public class ManagementBooksController implements Initializable {
                 alert.showAndWait();
             }
         } else {
-//                  set titile, header, content for alert box
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setTitle("Test Connection");
             alert.setHeaderText("Books Manager");
@@ -428,11 +383,11 @@ public class ManagementBooksController implements Initializable {
             alert.showAndWait();
         }
 
-        RefeshData();
+        RefreshData();
     }
 
     @FXML
-    private void ResetFeild() {
+    private void ResetField() {
         txtId.setText("");
         txtName.setText("");
         txtCoyear.setValue(null);
@@ -445,7 +400,6 @@ public class ManagementBooksController implements Initializable {
         boxCategories.setValue(null);
         boxAuthors.setValue(null);
         boxPublishs.setValue(null);
-//        boxStatus.setValue(null);
 
         errorAuthors.setVisible(false);
         errorCategory.setVisible(false);
@@ -461,8 +415,8 @@ public class ManagementBooksController implements Initializable {
     }
 
     @FXML
-    private void RefeshData() {
-        ResetFeild();
+    private void RefreshData() {
+        ResetField();
         InitData();
         btnSave.setDisable(true);
         CheckId();

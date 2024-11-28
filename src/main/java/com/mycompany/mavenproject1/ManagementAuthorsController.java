@@ -110,7 +110,7 @@ public class ManagementAuthorsController implements Initializable {
         }
 
         initClock();
-        RefeshData();
+        RefreshData();
     }
 
     int myIndex;
@@ -316,7 +316,7 @@ public class ManagementAuthorsController implements Initializable {
             }
 
         }
-        RefeshData();
+        RefreshData();
     }
 
     @FXML
@@ -355,19 +355,19 @@ public class ManagementAuthorsController implements Initializable {
             alert.showAndWait();
         }
 
-        RefeshData();
+        RefreshData();
     }
 
     @FXML
-    public void RefeshData() {
-        ResetFeild();
+    public void RefreshData() {
+        ResetField();
         initData();
         CheckId();
         btnSave.setDisable(true);
     }
 
     @FXML
-    public void ResetFeild() {
+    public void ResetField() {
         txtCreatedAt.setText("");
         txtDob.setValue(null);
         txtId.setText("");

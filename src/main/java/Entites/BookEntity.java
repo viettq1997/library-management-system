@@ -5,6 +5,7 @@ import db.JDBCConnect;
 import java.sql.*;
 import java.time.LocalDate;
 import javafx.collections.*;
+import utils.DateUtil;
 
 public class BookEntity {
 
@@ -153,7 +154,6 @@ public class BookEntity {
     }
 
     public static Book GetBookWithBookName(String name) {
-        ObservableList<Book> books = FXCollections.observableArrayList();
         String sql = "Select b.*, c.name AS categoryName, p.name AS publishingName, a.sign_name as authorSignname "
                 + "FROM books AS b "
                 + "JOIN categories AS c ON b.categoryId = c.id "
@@ -166,83 +166,35 @@ public class BookEntity {
             preparedStatement.setString(1, name);
             rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                Book b = new Book();
-
-                b.setId(rs.getInt("id"));
-                b.setName(rs.getString("name"));
-                b.setCoyear(rs.getString("co_year"));
-                b.setPrice(rs.getFloat("price"));
-                b.setQuantity(rs.getInt("quantity"));
-                b.setDescription(rs.getString("description"));
-                b.setPublishingId(rs.getInt("publishId"));
-                b.setPublishingName(rs.getString("publishingName"));
-                b.setCategoryId(rs.getInt("categoryId"));
-                b.setCategoryName(rs.getString("categoryName"));
-                b.setAuthorId(rs.getInt("authorId"));
-                b.setAuthorSignName(rs.getString("authorSignname"));
-
-                return b;
+            if (!rs.next()) {
+                return null;
             }
 
+            Book book = new Book();
+
+            book.setId(rs.getInt("id"));
+            book.setName(rs.getString("name"));
+            book.setCoyear(rs.getString("co_year"));
+            book.setPrice(rs.getFloat("price"));
+            book.setQuantity(rs.getInt("quantity"));
+            book.setDescription(rs.getString("description"));
+            book.setPublishingId(rs.getInt("publishId"));
+            book.setPublishingName(rs.getString("publishingName"));
+            book.setCategoryId(rs.getInt("categoryId"));
+            book.setCategoryName(rs.getString("categoryName"));
+            book.setAuthorId(rs.getInt("authorId"));
+            book.setAuthorSignName(rs.getString("authorSignname"));
+
+            return book;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return null;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
         } finally {
-//          Close databse at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
         }
-
-        return null;
-    }
-
-    public static ObservableList<Book> SearchByBookName(String name) {
-        ObservableList<Book> books = FXCollections.observableArrayList();
-        String sql = "Select b.*, c.name AS categoryName, p.name AS publishingName, a.sign_name as authorSignname "
-                + "FROM books AS b "
-                + "JOIN categories AS c ON b.categoryId = c.id "
-                + "JOIN publishing AS p ON b.publishId = p.id "
-                + "JOIN authors AS a ON b.authorId = a.id "
-                + "WHERE b.name like ?";
-        try {
-            connection = JDBCConnect.getJDBCConnection();
-            preparedStatement = connection.prepareCall(sql);
-            preparedStatement.setString(1, name);
-            rs = preparedStatement.executeQuery();
-
-            for (int i = 1; rs.next(); i++) {
-                Book b = new Book();
-
-                b.setIndex(i);
-                b.setId(rs.getInt("id"));
-                b.setName(rs.getString("name"));
-                b.setCoyear(rs.getString("co_year"));
-                b.setPrice(rs.getFloat("price"));
-                b.setQuantity(rs.getInt("quantity"));
-                b.setDescription(rs.getString("description"));
-                b.setPublishingId(rs.getInt("publishId"));
-                b.setPublishingName(rs.getString("publishingName"));
-                b.setCategoryId(rs.getInt("categoryId"));
-                b.setCategoryName(rs.getString("categoryName"));
-                b.setAuthorId(rs.getInt("authorId"));
-                b.setAuthorSignName(rs.getString("authorSignname"));
-
-                books.add(b);
-            }
-
-            return books;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-//          Close databse at end
-            JDBCConnect.closeResultSet(rs);
-            JDBCConnect.closePreparedStatement(preparedStatement);
-            JDBCConnect.closeConnection(connection);
-        }
-
-        return null;
     }
 
     public static ObservableList<Book> GetBookByCategoryId(int categoryId) {
@@ -283,7 +235,6 @@ public class BookEntity {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-//          Close databse at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
@@ -330,54 +281,6 @@ public class BookEntity {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-//          Close databse at end
-            JDBCConnect.closeResultSet(rs);
-            JDBCConnect.closePreparedStatement(preparedStatement);
-            JDBCConnect.closeConnection(connection);
-        }
-
-        return null;
-    }
-
-    public static ObservableList<Book> GetBookByPublishId(int publishId) {
-        ObservableList<Book> books = FXCollections.observableArrayList();
-        String sql = "Select b.*, c.name AS categoryName, p.name AS publishingName, a.sign_name as authorSignname "
-                + "FROM books AS b "
-                + "JOIN categories AS c ON b.categoryId = c.id "
-                + "JOIN publishing AS p ON b.publishId = p.id "
-                + "JOIN authors AS a ON b.authorId = a.id "
-                + "WHERE b.publishId = ?";
-        try {
-            connection = JDBCConnect.getJDBCConnection();
-            preparedStatement = connection.prepareCall(sql);
-            preparedStatement.setInt(1, publishId);
-            rs = preparedStatement.executeQuery();
-
-            for (int i = 1; rs.next(); i++) {
-                Book b = new Book();
-
-                b.setIndex(i);
-                b.setId(rs.getInt("id"));
-                b.setName(rs.getString("name"));
-                b.setCoyear(rs.getString("co_year"));
-                b.setPrice(rs.getFloat("price"));
-                b.setQuantity(rs.getInt("quantity"));
-                b.setDescription(rs.getString("description"));
-                b.setPublishingId(rs.getInt("publishId"));
-                b.setPublishingName(rs.getString("publishingName"));
-                b.setCategoryId(rs.getInt("categoryId"));
-                b.setCategoryName(rs.getString("categoryName"));
-                b.setAuthorId(rs.getInt("authorId"));
-                b.setAuthorSignName(rs.getString("authorSignname"));
-
-                books.add(b);
-            }
-
-            return books;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-//          Close databse at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
@@ -391,16 +294,12 @@ public class BookEntity {
                 + "(name, co_year, price, quantity, description, categoryId, authorId, publishId) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-//      set time at present with accuracy approximately is millis
-        long milis = System.currentTimeMillis();
-        Date preDate = new Date(milis);
-
         try {
             connection = JDBCConnect.getJDBCConnection();
 
             preparedStatement = connection.prepareCall(sql);
             preparedStatement.setString(1, book.getName());
-            preparedStatement.setDate(2, convertStringToDate(book.getCoyear()));
+            preparedStatement.setDate(2, DateUtil.convertStringToDate(book.getCoyear()));
             preparedStatement.setFloat(3, book.getPrice());
             preparedStatement.setInt(4, book.getQuantity());
             preparedStatement.setString(5, book.getDescription());
@@ -408,18 +307,11 @@ public class BookEntity {
             preparedStatement.setInt(7, book.getAuthorId());
             preparedStatement.setInt(8, book.getPublishingId());
 
-            preparedStatement.executeUpdate();
-
-            if (preparedStatement.executeUpdate() > 0) {
-                return true;
-            }
-
-            return false;
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
-
-        return false;
     }
 
     public static boolean Update(Book book) {
@@ -427,16 +319,12 @@ public class BookEntity {
                 + "SET name = ?, co_year = ?, price = ?, quantity = ?, description = ?, categoryId = ?, authorId = ?, publishId = ? "
                 + "WHERE id = ?";
 
-//      set time at present with accuracy approximately is millis
-        long milis = System.currentTimeMillis();
-        Date preDate = new Date(milis);
-
         try {
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareCall(sql);
 
             preparedStatement.setString(1, book.getName());
-            preparedStatement.setDate(2, convertStringToDate(book.getCoyear()));
+            preparedStatement.setDate(2, DateUtil.convertStringToDate(book.getCoyear()));
             preparedStatement.setFloat(3, book.getPrice());
             preparedStatement.setInt(4, book.getQuantity());
             preparedStatement.setString(5, book.getDescription());
@@ -445,13 +333,7 @@ public class BookEntity {
             preparedStatement.setInt(8, book.getPublishingId());
             preparedStatement.setInt(9, book.getId());
 
-            preparedStatement.executeUpdate();
-
-            if (preparedStatement.executeUpdate() > 0) {
-                return true;
-            }
-
-            return false;
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -466,29 +348,12 @@ public class BookEntity {
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareCall(sql);
             preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
 
-            if (preparedStatement.executeUpdate() > 0) {
-                return true;
-            }
-
-            return false;
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
         return false;
     }
-
-    private static Date convertStringToDate(String date) {
-        String[] dateArray = date.split("-");
-        int year = Integer.parseInt(dateArray[0]);
-        int month = Integer.parseInt(dateArray[1]);
-        int day = Integer.parseInt(dateArray[2]);
-        LocalDate localdate = LocalDate.of(year, month, day);
-        Date newDate = Date.valueOf(localdate);
-
-        return newDate;
-    }
-
 }

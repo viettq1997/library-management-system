@@ -235,6 +235,6 @@ public class Account {
 
     @Override
     public String toString() {
-        return this.UID.get();
+        return this.username.get();
     }
 }

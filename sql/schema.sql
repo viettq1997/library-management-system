@@ -8,7 +8,7 @@ create table accounts (
     UID VARCHAR(36),
     avatar VARCHAR(1000),
     username VARCHAR(64),
-    password VARCHAR(20),
+    password VARCHAR(64),
     full_name VARCHAR(64),
     gender int,
     email VARCHAR(50),
@@ -104,7 +104,7 @@ INSERT INTO roles (name) VALUES ('Reader');
 INSERT INTO accounts
     (UID, avatar, username, password, full_name, gender, email, dob, mobile, status, roleId, createdAt, updatedAt)
 VALUES
-    ('82e3c116-29d5-4e87-a5c7-716ab8cfebc1', 'https://example.com/avatar.png', 'admin', 'password123', 'Admin', 1, 'admin@example.com', '1990-05-15', '0123456789', 1, 1, '2024-11-22', '2024-11-22');
+    ('82e3c116-29d5-4e87-a5c7-716ab8cfebc1', 'https://example.com/avatar.png', 'admin', '482c811da5d5b4bc6d497ffa98491e38', 'Admin', 1, 'admin@example.com', '1990-05-15', '0123456789', 1, 1, '2024-11-22', '2024-11-22');
 
 INSERT INTO status_manage (name) VALUES ('Importing');
 INSERT INTO status_manage (name) VALUES ('Imported');

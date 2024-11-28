@@ -297,7 +297,7 @@ public class ManagementPublishingController implements Initializable {
             }
         }
 
-        RefeshData();
+        RefreshData();
     }
 
     @FXML
@@ -334,11 +334,11 @@ public class ManagementPublishingController implements Initializable {
             alert.showAndWait();
         }
 
-        RefeshData();
+        RefreshData();
     }
 
     @FXML
-    private void ResetFeild() {
+    private void ResetField() {
         txtId.setText("");
         txtName.setText("");
         txtAddress.setText("");
@@ -356,8 +356,8 @@ public class ManagementPublishingController implements Initializable {
     }
 
     @FXML
-    private void RefeshData() {
-        ResetFeild();
+    private void RefreshData() {
+        ResetField();
         table();
     }
 

@@ -57,7 +57,7 @@
                                     <TableColumn fx:id="colUpdatedAt" minWidth="-Infinity" prefWidth="90.0" text="Updated At" />
                                  </columns>
                               </TableView>
-                              <Button fx:id="btnRefesh" layoutX="16.0" layoutY="7.0" mnemonicParsing="false" onAction="#RefeshData" prefHeight="30.0" prefWidth="100.0" styleClass="button_danger" stylesheets="@../../../CSS/button.css" text="Refesh" />
+                              <Button fx:id="btnRefesh" layoutX="16.0" layoutY="7.0" mnemonicParsing="false" onAction="#RefreshData" prefHeight="30.0" prefWidth="100.0" styleClass="button_danger" stylesheets="@../../../CSS/button.css" text="Refesh" />
                               <TextField fx:id="txtSearch" layoutX="643.0" layoutY="10.0" onKeyReleased="#Search" prefHeight="30.0" prefWidth="200.0" promptText="Search" style="-fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-background-radius: 2em;" />
                               <Button fx:id="btnSearch" layoutX="855.0" layoutY="10.0" mnemonicParsing="false" onAction="#Search" prefHeight="30.0" prefWidth="50.0" styleClass="button_primary" text="Find" />
                            </children>
@@ -149,7 +149,7 @@
                               <TextField fx:id="txtCreatedAt" disable="true" editable="false" layoutX="563.0" layoutY="216.0" prefHeight="26.0" prefWidth="300.0" styleClass="input-disabled" />
                               <Button fx:id="btnSave" layoutX="29.0" layoutY="325.0" mnemonicParsing="false" onAction="#BtnSaveClick" prefHeight="30.0" prefWidth="85.0" styleClass="button_success" text="Save" />
                               <Button fx:id="btnDelete" layoutX="142.0" layoutY="325.0" mnemonicParsing="false" onAction="#BtnDeleteClick" prefHeight="30.0" prefWidth="85.0" styleClass="button_danger" stylesheets="@../../../CSS/button.css" text="Delete" />
-                              <Button fx:id="btnReset" layoutX="255.0" layoutY="325.0" mnemonicParsing="false" onAction="#ResetFeild" prefHeight="30.0" prefWidth="85.0" styleClass="button_primary" stylesheets="@../../../CSS/button.css" text="Reset" />
+                              <Button fx:id="btnReset" layoutX="255.0" layoutY="325.0" mnemonicParsing="false" onAction="#ResetField" prefHeight="30.0" prefWidth="85.0" styleClass="button_primary" stylesheets="@../../../CSS/button.css" text="Reset" />
                               <DatePicker fx:id="txtCoyear" editable="false" layoutX="131.0" layoutY="114.0" onAction="#Validated" prefHeight="26.0" prefWidth="300.0" style="-fx-background-color: #f9f7f4;" />
                            </children>
                            <padding>

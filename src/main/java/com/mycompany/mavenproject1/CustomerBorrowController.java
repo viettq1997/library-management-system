@@ -186,7 +186,7 @@ public class CustomerBorrowController implements Initializable {
             alert.showAndWait();
             mg.getStatus().setId(outOfStockStatusManage.getId());
 
-            RefeshData();
+            RefreshData();
         } else {
             int newQuantityBook = book.getQuantity() - 1;
             book.setQuantity(newQuantityBook);
@@ -223,12 +223,12 @@ public class CustomerBorrowController implements Initializable {
 
             BorrowEntity bre = new BorrowEntity();
             bre.Add(br);
-            RefeshData();
+            RefreshData();
         }
     }
 
     @FXML
-    private void ResetFeild() {
+    private void ResetField() {
         boxAuthor.setValue(null);
         boxBook.setValue(null);
         boxPublishing.setValue(null);
@@ -237,8 +237,8 @@ public class CustomerBorrowController implements Initializable {
     }
 
     @FXML
-    private void RefeshData() {
-        ResetFeild();
+    private void RefreshData() {
+        ResetField();
         InitData();
     }
 

@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import utils.DateUtil;
+
+import static utils.DateUtil.convertStringToDate;
 
 /**
  *
@@ -181,11 +184,7 @@ public class AuthorEntity {
             preparedStatement.setDate(4, preDate);
             preparedStatement.setDate(5, preDate);
 
-            if (preparedStatement.executeUpdate() > 0) {
-                return true;
-            }else{
-                return false;
-            }
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -209,11 +208,7 @@ public class AuthorEntity {
             preparedStatement.setDate(4, preDate);
             preparedStatement.setInt(5, author.getId());
 
-            if (preparedStatement.executeUpdate() > 0) {
-                return true;
-            }else{
-                return false;
-            }
+            return preparedStatement.executeUpdate() > 0;
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -230,30 +225,10 @@ public class AuthorEntity {
             preparedStatement = connection.prepareCall(sql);
             preparedStatement.setInt(1, id);
 
-            if (preparedStatement.executeUpdate() > 0) {
-                System.out.println("Delete Successfully !");
-
-                return true;
-            } else {
-                System.out.println("Delete Faild !");
-
-                return false;
-            }
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
         return false;
-    }
-
-    private static Date convertStringToDate(String date) {
-        String[] dateArray = date.split("-");
-        int year = Integer.parseInt(dateArray[0]);
-        int month = Integer.parseInt(dateArray[1]);
-        int day = Integer.parseInt(dateArray[2]);
-        LocalDate localdate = LocalDate.of(year, month, day);
-        Date newDate = Date.valueOf(localdate);
-
-        return newDate;
     }
 }

@@ -498,15 +498,14 @@ public class ManageBookEntity {
 
     public static boolean Add(ManageBook obj) {
         String sql = "INSERT INTO manage_book (price_per_book, accountId, bookId, statusId, createdAt, updatedAt) values(?, ?, ?, ?, ?, ?)";
-//      set time at present with accuracy approximately is millis
+
         long milis = System.currentTimeMillis();
         Date preDate = new Date(milis);
 
         try {
-//          connect to database and execute query with hidden value
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareCall(sql);
-//          set hidden value in query
+
             preparedStatement.setFloat(1, obj.getPricePerBook());
             preparedStatement.setInt(2, obj.getAccount().getId());
             preparedStatement.setInt(3, obj.getBook().getId());
@@ -514,22 +513,11 @@ public class ManageBookEntity {
             preparedStatement.setDate(5, preDate);
             preparedStatement.setDate(6, preDate);
 
-//          if add sucess reset all feild and reset table view, all feild else show message fail
-            if (preparedStatement.executeUpdate() > 0) {
-
-                System.out.println("Add successfully !");
-
-                return true;
-            } else {
-                System.out.println("Add fail !");
-
-                return false;
-            }
-
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
-        return false;
     }
 
     public static boolean Update(ManageBook obj) {
