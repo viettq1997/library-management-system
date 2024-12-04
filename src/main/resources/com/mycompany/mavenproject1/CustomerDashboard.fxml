@@ -18,9 +18,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1180.0" stylesheets="@../../../CSS/customer.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.mavenproject1.CustomerDashboardController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1180.0" stylesheets="@../../../CSS/customer.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.mavenproject1.CustomerDashboardController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutY="5.0" prefHeight="800.0" prefWidth="300.0" style="-fx-background-color: #c7b090;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" layoutY="5.0" prefHeight="800.0" prefWidth="260.0" style="-fx-background-color: #c7b090;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER" prefHeight="70.0" prefWidth="401.0">
                <children>
@@ -148,7 +148,7 @@
             </Button>
          </children>
       </VBox>
-      <StackPane layoutX="258.0" layoutY="275.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane layoutX="258.0" layoutY="275.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <top>
@@ -170,7 +170,7 @@
                <right>
                   <AnchorPane BorderPane.alignment="CENTER">
                      <children>
-                        <Pane layoutX="4.0" prefHeight="686.0" prefWidth="247.0" style="-fx-background-radius: 10px; -fx-background-color: #dddddd;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <Pane layoutX="4.0" prefHeight="686.0" prefWidth="247.0" style="-fx-background-radius: 10px; -fx-background-color: #dddddd;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                            <children>
                               <TableView fx:id="tableCategories" layoutX="18.0" layoutY="51.0" prefHeight="270.0" prefWidth="211.0">
                                  <columns>
