@@ -3,7 +3,6 @@ package Entites;
 import Models.*;
 import db.JDBCConnect;
 import java.sql.*;
-import java.time.LocalDate;
 import javafx.collections.*;
 import utils.DateUtil;
 
@@ -49,7 +48,6 @@ public class BookEntity {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-//          Close databse at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
@@ -59,7 +57,6 @@ public class BookEntity {
     }
 
     public static Book GetBookWithBookId(int id) {
-        ObservableList<Book> books = FXCollections.observableArrayList();
         String sql = "Select b.*, c.name AS categoryName, p.name AS publishingName, a.sign_name as authorSignname "
                 + "FROM books AS b "
                 + "JOIN categories AS c ON b.categoryId = c.id "
@@ -72,7 +69,7 @@ public class BookEntity {
             preparedStatement.setInt(1, id);
             rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 Book b = new Book();
 
                 b.setId(rs.getInt("id"));
@@ -95,7 +92,6 @@ public class BookEntity {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-//          Close databse at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
@@ -144,7 +140,6 @@ public class BookEntity {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-//          Close databse at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);

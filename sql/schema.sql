@@ -93,7 +93,9 @@ create table borrow (
     amount_of_pay float,
     manageId int,
     statusId int,
+    accountId int,
     FOREIGN KEY (manageId) REFERENCES manage_book(id),
+    FOREIGN KEY (accountId) REFERENCES accounts(id),
     FOREIGN KEY (statusId) REFERENCES status_borrow(id)
 );
 
