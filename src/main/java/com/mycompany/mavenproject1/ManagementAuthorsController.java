@@ -94,7 +94,6 @@ public class ManagementAuthorsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
 
         User user = User.getInstace();
         String sessionUser = user.getUserName();
@@ -209,9 +208,7 @@ public class ManagementAuthorsController implements Initializable {
 
     @FXML
     public void Search() {
-//      get value at search text feild
         String search = txtSearch.getText();
-//      call ObservableList with name is categories and value from function search in CategoryEntity
         ObservableList<Author> authors = AuthorEntity.SearchBySignName(search);
 
         table(authors);
@@ -229,24 +226,18 @@ public class ManagementAuthorsController implements Initializable {
         author.setSign_name(signName);
         author.setDob(dob);
 
-//      Call Alert box
         Alert alert = new Alert(Alert.AlertType.NONE);
-//      inpId is empty we create new categories else we update this
         if (id.isEmpty()) {
 
-//          if category's name doesn't exists, add this category else show message "This Category exists!"
             if (AuthorEntity.GetAuthorWithSignName(signName) == null) {
 
-//              if add success, show a box with message "Added Successfully!" else show message "Added Fail!"
                 if (AuthorEntity.Add(author)) {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.INFORMATION);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Authors Manager");
                     alert.setContentText("Added Successfully!");
                     alert.showAndWait();
                 } else {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Authors Manager");
@@ -254,7 +245,6 @@ public class ManagementAuthorsController implements Initializable {
                     alert.showAndWait();
                 }
             } else {
-//              set titile, header, content for alert box
                 alert.setAlertType(Alert.AlertType.ERROR);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Authors Manager");
@@ -263,20 +253,16 @@ public class ManagementAuthorsController implements Initializable {
             }
 
         } else {
-//          set id for object category
             author.setId(Integer.parseInt(id));
 
             if (AuthorEntity.GetAuthorWithId(author.getId()).equals(author.getName())) {
-//              if Update success, show a box with message "Updated Successfully!" else show message "Updated Fail!"
                 if (AuthorEntity.Update(author)) {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.INFORMATION);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Authors Manager");
                     alert.setContentText("Updated Successfully!");
                     alert.showAndWait();
                 } else {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Authors Manager");
@@ -285,19 +271,13 @@ public class ManagementAuthorsController implements Initializable {
                 }
             } else {
                 if (AuthorEntity.GetAuthorWithSignName(signName) == null) {
-//                    if Update  {
-//                        success
-//                    }
-//                    , show a box with message "Updated Successfully!" else show message "Updated Fail!"
                     if (AuthorEntity.Update(author)) {
-//                      set titile, header, content for alert box
                         alert.setAlertType(Alert.AlertType.INFORMATION);
                         alert.setTitle("Test Connection");
                         alert.setHeaderText("Authors Manager");
                         alert.setContentText("Updated Successfully!");
                         alert.showAndWait();
                     } else {
-//                      set titile, header, content for alert box
                         alert.setAlertType(Alert.AlertType.ERROR);
                         alert.setTitle("Test Connection");
                         alert.setHeaderText("Authors Manager");
@@ -306,7 +286,6 @@ public class ManagementAuthorsController implements Initializable {
                     }
                 } else {
 
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Authors Manager");
@@ -330,7 +309,6 @@ public class ManagementAuthorsController implements Initializable {
         if (existsBook.equals(noBook) || existsBook == null) {
             if (AuthorEntity.Delete(id)) {
 
-//          set titile, header, content for alert box
                 alert.setAlertType(Alert.AlertType.INFORMATION);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Authors Manager");
@@ -339,7 +317,6 @@ public class ManagementAuthorsController implements Initializable {
 
             } else {
 
-//          set titile, header, content for alert box
                 alert.setAlertType(Alert.AlertType.ERROR);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Authors Manager");

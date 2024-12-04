@@ -164,21 +164,16 @@ public class ManagementCategoriesController implements Initializable {
     }
 
     public void BtnSearchClick() {
-//      get value at search text feild
         String search = txtSearch.getText();
-//      call ObservableList with name is categories and value from function search in CategoryEntity
         ObservableList<Category> categories = CategoryEntity.Search(search);
 
-//      set item with type Category with list type is ObservableList and ObservableList's name is categories
         table.setItems(categories);
-//      set value for col
         colIndex.setCellValueFactory(f -> f.getValue().indexProperty().asObject());
         colId.setCellValueFactory(f -> f.getValue().idProperty().asString());
         colName.setCellValueFactory(f -> f.getValue().nameProperty());
         colCreatedAt.setCellValueFactory(f -> f.getValue().createdAtProperty());
         colUpdatedAt.setCellValueFactory(f -> f.getValue().updatedAtProperty());
 
-//      add event listener clicked each row
         table.setRowFactory(tv -> {
             TableRow<Category> myRow = new TableRow<>();
             myRow.setOnMouseClicked(event -> {
@@ -196,35 +191,26 @@ public class ManagementCategoriesController implements Initializable {
 
     public void BtnSaveClick() {
 
-//      Uppercase first char of each word
         FomartInputName();
 
-//      Call fx:id at fxml(id feild and name feild)
         String inpId = txtId.getText();
         String inpName = txtName.getText();
 
-//      set entity
         Category category = new Category();
         category.setName(inpName);
 
-//      Call Alert box
         Alert alert = new Alert(Alert.AlertType.NONE);
-//      inpId is empty we create new categories else we update this
         if (inpId.isEmpty()) {
 
-//          if category's name doesn't exists, add this category else show message "This Category exists!"
             if (CategoryEntity.GetCategoryByName(inpName) == null) {
 
-//              if add success, show a box with message "Added Successfully!" else show message "Added Fail!"
                 if (CategoryEntity.Add(category)) {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.INFORMATION);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Categories Manager");
                     alert.setContentText("Added Successfully!");
                     alert.showAndWait();
                 } else {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Categories Manager");
@@ -232,7 +218,6 @@ public class ManagementCategoriesController implements Initializable {
                     alert.showAndWait();
                 }
             } else {
-//              set titile, header, content for alert box
                 alert.setAlertType(Alert.AlertType.ERROR);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Categories Manager");
@@ -241,14 +226,11 @@ public class ManagementCategoriesController implements Initializable {
             }
 
         } else {
-//          set id for object category
             category.setId(Integer.parseInt(inpId));
             if (!CategoryEntity.GetCategoryById(category.getId()).getName().equals(category.getName())) {
                 if (CategoryEntity.GetCategoryByName(category.getName()).equals(null)) {
-//                  if Update success, show a box with message "Updated Successfully!" else show message "Updated Fail!"
                     if (CategoryEntity.Update(category)) {
 
-//                      set titile, header, content for alert box
                         alert.setAlertType(Alert.AlertType.INFORMATION);
                         alert.setTitle("Test Connection");
                         alert.setHeaderText("Categories Manager");
@@ -257,7 +239,6 @@ public class ManagementCategoriesController implements Initializable {
 
                     } else {
 
-//                      set titile, header, content for alert box
                         alert.setAlertType(Alert.AlertType.ERROR);
                         alert.setTitle("Test Connection");
                         alert.setHeaderText("Categories Manager");
@@ -267,7 +248,6 @@ public class ManagementCategoriesController implements Initializable {
                     }
 
                 } else {
-//                      set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Categories Manager");
@@ -275,10 +255,8 @@ public class ManagementCategoriesController implements Initializable {
                     alert.showAndWait();
                 }
             } else {
-//          if Update success, show a box with message "Updated Successfully!" else show message "Updated Fail!"
                 if (CategoryEntity.Update(category)) {
 
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.INFORMATION);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Categories Manager");
@@ -287,7 +265,6 @@ public class ManagementCategoriesController implements Initializable {
 
                 } else {
 
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Categories Manager");
@@ -313,7 +290,6 @@ public class ManagementCategoriesController implements Initializable {
         if (existsBook.equals(noBook) || existsBook.equals(null)) {
             if (CategoryEntity.Delete(id)) {
 
-//          set titile, header, content for alert box
                 alert.setAlertType(Alert.AlertType.INFORMATION);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Categories Manager");
@@ -322,7 +298,6 @@ public class ManagementCategoriesController implements Initializable {
 
             } else {
 
-//          set titile, header, content for alert box
                 alert.setAlertType(Alert.AlertType.ERROR);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Categories Manager");
@@ -342,7 +317,6 @@ public class ManagementCategoriesController implements Initializable {
     }
 
     public void CheckInputName() {
-//      if txtName empty show error else hide error and undisable button save
         if (txtName.getText().isEmpty()) {
             errorName.setVisible(true);
             btnSave.setDisable(true);
@@ -350,7 +324,6 @@ public class ManagementCategoriesController implements Initializable {
             errorName.setVisible(false);
             btnSave.setDisable(false);
         }
-//      if txtName have length() > 64 show alert box and cannot click at button Save
         if (txtName.getText().length() > 64) {
             btnSave.setDisable(true);
             Locale.setDefault(new Locale("en", "English"));
@@ -398,25 +371,17 @@ public class ManagementCategoriesController implements Initializable {
     public void CheckId() {
         String id = txtId.getText();
 
-        if (id.isEmpty()) {
-            btnDelete.setDisable(true);
-        } else {
-            btnDelete.setDisable(false);
-        }
+        btnDelete.setDisable(id.isEmpty());
     }
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
 
         User user = User.getInstace();
         String sessionUser = user.getUserName();
         try {
 
-            if (sessionUser.equals("") || sessionUser.equals(null)) {
+            if (sessionUser.isEmpty()) {
                 SignOut();
             } else {
                 sessionUsername.setText(sessionUser);

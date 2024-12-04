@@ -245,7 +245,6 @@ public class AccountEntity {
     
     public static boolean SignUp(Account acc) {
         String insertOne = "INSERT INTO accounts (UID, username, avatar, password, full_name, gender, email, mobile, status, roleId, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//      set time at present with accuracy approximately is millis
         long milis = System.currentTimeMillis();
         Date preDate = new Date(milis);
         try {
@@ -280,7 +279,6 @@ public class AccountEntity {
 
     public static boolean Add(Account acc) {
         String insertOne = "INSERT INTO accounts (UID, username, avatar, password, full_name, gender, email, dob, mobile, status, roleId, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//      set time at present with accuracy approximately is millis
         long milis = System.currentTimeMillis();
         Date preDate = new Date(milis);
         Date formatDob = convertStringToDate(acc.getDob());

@@ -37,7 +37,6 @@ public class CategoryEntity {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         } finally {
-//          Close databse at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
@@ -48,15 +47,12 @@ public class CategoryEntity {
     public static Category GetCategoryById(int id) {
 
         try {
-//          connect to database and execute query with hidden value
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareCall("Select * from categories WHERE id = ?");
-//          set hidden value in query
             preparedStatement.setInt(1, id);
             rs = preparedStatement.executeQuery();
 
-//          set a Category, add and return ObservableList with name is categories
-            while (rs.next()) {
+            if (rs.next()) {
                 Category c = new Category();
                 c.setId(rs.getInt("id"));
                 c.setName(rs.getString("name"));
@@ -67,10 +63,8 @@ public class CategoryEntity {
             }
 
         } catch (SQLException ex) {
-//          show message in console screen when wrong at query
             System.out.println(ex.getMessage());
         } finally {
-//          Close databse at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
@@ -81,15 +75,12 @@ public class CategoryEntity {
     public static Category GetCategoryByName(String name) {
 
         try {
-//          connect to database and execute query with hidden value
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareCall("Select * from categories WHERE name = ?");
-//          set hidden value in query
             preparedStatement.setString(1, name);
             rs = preparedStatement.executeQuery();
 
-//          set a Category, add and return ObservableList with name is categories
-            while (rs.next()) {
+            if (rs.next()) {
                 Category c = new Category();
                 c.setId(rs.getInt("id"));
                 c.setName(rs.getString("name"));
@@ -100,10 +91,8 @@ public class CategoryEntity {
             }
 
         } catch (SQLException ex) {
-//          show message in console screen when wrong at query
             System.out.println(ex.getMessage());
         } finally {
-//          Close databse at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
@@ -115,14 +104,11 @@ public class CategoryEntity {
         ObservableList<Category> categories = FXCollections.observableArrayList();
 
         try {
-//          connect to database and execute query with hidden value
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareCall("Select * from categories WHERE name like ?");
-//          set hidden value in query
             preparedStatement.setString(1, "%" + search + "%");
             rs = preparedStatement.executeQuery();
 
-//          set a Category, add and return ObservableList with name is categories
             for (int i = 1; rs.next(); i++) {
                 Category c = new Category();
 
@@ -137,10 +123,8 @@ public class CategoryEntity {
 
             return categories;
         } catch (SQLException ex) {
-//          show message in console screen when wrong at query
             System.out.println(ex.getMessage());
         } finally {
-//          Close databse at end
             JDBCConnect.closeResultSet(rs);
             JDBCConnect.closePreparedStatement(preparedStatement);
             JDBCConnect.closeConnection(connection);
@@ -150,20 +134,16 @@ public class CategoryEntity {
 
     public static boolean Add(Category obj) {
         String sql = "Insert into categories (name, createdAt, updatedAt) values(?, ?, ?)";
-//      set time at present with accuracy approximately is millis
         long milis = System.currentTimeMillis();
         Date preDate = new Date(milis);
 
         try {
-//          connect to database and execute query with hidden value
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareCall(sql);
-//          set hidden value in query
             preparedStatement.setString(1, obj.getName());
             preparedStatement.setDate(2, preDate);
             preparedStatement.setDate(3, preDate);
 
-//          if add sucess reset all feild and reset table view, all feild else show message fail
             if (preparedStatement.executeUpdate() > 0) {
 
                 System.out.println("Add successfully !");
@@ -194,7 +174,6 @@ public class CategoryEntity {
             preparedStatement.setInt(3, obj.getId());
             System.out.println(preparedStatement.getResultSet());
 
-//          if update sucess reset all feild and reset table view, all feild else show message fail
             if (preparedStatement.executeUpdate() > 0) {
                 System.out.println("Updated Successfully !");
 

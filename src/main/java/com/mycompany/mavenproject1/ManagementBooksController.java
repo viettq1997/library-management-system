@@ -150,7 +150,6 @@ public class ManagementBooksController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
 
         User user = User.getInstace();
         String sessionUser = user.getUserName();
@@ -283,7 +282,6 @@ public class ManagementBooksController implements Initializable {
                     alert.showAndWait();
                 }
             } else {
-//              set titile, header, content for alert box
                 alert.setAlertType(Alert.AlertType.ERROR);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Books Manager");

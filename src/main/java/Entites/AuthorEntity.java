@@ -171,7 +171,6 @@ public class AuthorEntity {
                 + "(name, dob , sign_name, createdAt, updatedAt) "
                 + "VALUES(?, ?, ?, ?, ?)";
 
-//      set time at present with accuracy approximately is millis
         long milis = System.currentTimeMillis();
         Date preDate = new Date(milis);
 
@@ -195,7 +194,6 @@ public class AuthorEntity {
     public static boolean Update(Author author) {
         String sql = "UPDATE authors SET name = ?, dob = ?, sign_name = ?, updatedAt = ? WHERE id = ?";
 
-//      set time at present with accuracy approximately is millis
         long milis = System.currentTimeMillis();
         Date preDate = new Date(milis);
 

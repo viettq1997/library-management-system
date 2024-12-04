@@ -16,8 +16,7 @@ public class MessageController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    }
     
     @FXML
     public void setMessage(String message){

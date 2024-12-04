@@ -85,14 +85,6 @@ public class ManagementAccountsController implements Initializable {
     private TextField txtMobile;
     @FXML
     private Label errorMobile;
-//    @FXML
-//    private TextField txtAvatar;
-//    @FXML
-//    private Button btnAvatar;
-//    @FXML
-//    private ImageView imgAvatar;
-//    @FXML
-//    private Label errorAvatar;
     @FXML
     private TextField txtCreatedAt;
     @FXML
@@ -109,8 +101,6 @@ public class ManagementAccountsController implements Initializable {
     private TableColumn<Account, String> colIndex;
     @FXML
     private TableColumn<Account, String> colUID;
-//    @FXML
-//    private TableColumn<Account, String> colAvatar;
     @FXML
     private TableColumn<Account, String> colUsername;
     @FXML
@@ -188,7 +178,6 @@ public class ManagementAccountsController implements Initializable {
         table.setItems(accounts);
         colIndex.setCellValueFactory(f -> f.getValue().indexProperty().asString());
         colUID.setCellValueFactory(f -> f.getValue().UIDProperty());
-//        colAvatar.setCellValueFactory(f -> f.getValue().avatarProperty());
         colUsername.setCellValueFactory(f -> f.getValue().usernameProperty());
         colPassword.setCellValueFactory(f -> f.getValue().passwordProperty());
         colFullname.setCellValueFactory(f -> f.getValue().full_nameProperty());

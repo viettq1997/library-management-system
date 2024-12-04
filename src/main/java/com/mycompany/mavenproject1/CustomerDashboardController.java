@@ -54,12 +54,8 @@ public class CustomerDashboardController implements Initializable {
     @FXML
     private Label totalPublishsingInterested;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         Account acc = AccountEntity.GetAccountByUsername(user.getUserName());
         String sessionUser = acc.getFull_name();
         try {
@@ -72,7 +68,6 @@ public class CustomerDashboardController implements Initializable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-//      run real time and replace a time String for labelClock
         initClock();
         Total();
         Top5CategoriesFavorites();
@@ -130,7 +125,6 @@ public class CustomerDashboardController implements Initializable {
         String username = user.getUserName();
 
         Account acc = AccountEntity.GetAccountByUsername(username);
-//        tableCategories
         ObservableList<Top5CategoriesInterested> t5c = ManageBookEntity.Top5CategoryInterestedByUID(acc.getUID());
         tableCategories.setItems(t5c);
         colCategoryName.setCellValueFactory(f -> {
@@ -147,7 +141,6 @@ public class CustomerDashboardController implements Initializable {
         String username = user.getUserName();
 
         Account acc = AccountEntity.GetAccountByUsername(username);
-//        tableAuthors
         ObservableList<Top5AuthorsIntersted> t5c = ManageBookEntity.Top5AuthorInterestedByUID(acc.getUID());
         tableAuthors.setItems(t5c);
         colAuthorsName.setCellValueFactory(f -> {

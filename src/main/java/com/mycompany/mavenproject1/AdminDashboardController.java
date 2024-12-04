@@ -50,8 +50,6 @@ public class AdminDashboardController implements Initializable {
     private Label totalPublishs;
     @FXML
     private Label totalAccounts;
-//    @FXML
-//    private Label totalLibrarians;
     @FXML
     private Label totalReaders;
 
@@ -72,7 +70,6 @@ public class AdminDashboardController implements Initializable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-//      run real time and replace a time String for labelClock
         initClock();
         Total();
     }
@@ -133,7 +130,6 @@ public class AdminDashboardController implements Initializable {
         ObservableList<Author> authors = AuthorEntity.GetAll();
         ObservableList<Publishing> publishs = PublishingEntity.GetAll();
         ObservableList<Account> accounts = AccountEntity.GetAll();
-//        ObservableList<Account> librarians = AccountEntity.GetAccountByRole(2);
         ObservableList<Account> readers = AccountEntity.GetAccountByRole(readerRole.getId());
 
         totalBooks.setText(String.valueOf(books.size()));
@@ -141,7 +137,6 @@ public class AdminDashboardController implements Initializable {
         totalAuthors.setText(String.valueOf(authors.size()));
         totalPublishs.setText(String.valueOf(publishs.size()));
         totalAccounts.setText(String.valueOf(accounts.size()));
-//        totalLibrarians.setText(String.valueOf(librarians.size()));
         totalReaders.setText(String.valueOf(readers.size()));
     }
 }
