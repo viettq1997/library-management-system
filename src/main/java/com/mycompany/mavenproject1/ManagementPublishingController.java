@@ -123,11 +123,8 @@ public class ManagementPublishingController implements Initializable {
             System.out.println(e.getMessage());
         }
 
-//      run real time and replace a time String for labelClock
         initClock();
-//      get all data from database 
         table();
-//      set button disable
         btnSave.setDisable(true);
         CheckId();
     }
@@ -143,15 +140,9 @@ public class ManagementPublishingController implements Initializable {
 
     @FXML
     public void CheckId() {
-//      get value of UID feild
         String id = txtId.getText();
 
-//      Set button delete disable when UID is empty else unset disable
-        if (id.isEmpty()) {
-            btnDelete.setDisable(true);
-        } else {
-            btnDelete.setDisable(false);
-        }
+        btnDelete.setDisable(id.isEmpty());
     }
 
     @FXML
@@ -203,25 +194,19 @@ public class ManagementPublishingController implements Initializable {
         pub.setAddress(address);
         pub.setCoyear(coyear);
 
-//      Call Alert box
         Alert alert = new Alert(Alert.AlertType.NONE);
 
-//      inpId is empty we create new categories else we update this
         if (id.isEmpty()) {
 
-//          if publishing's name doesn't exists, add this category else show message "This Publishing exists!"
             if (PublishingEntity.GetPublishingWithName(name) == null) {
 
-//              if add success, show a box with message "Added Successfully!" else show message "Added Fail!"
                 if (PublishingEntity.Add(pub)) {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.INFORMATION);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Publishings Manager");
                     alert.setContentText("Added Successfully!");
                     alert.showAndWait();
                 } else {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Publishings Manager");
@@ -229,7 +214,6 @@ public class ManagementPublishingController implements Initializable {
                     alert.showAndWait();
                 }
             } else {
-//              set titile, header, content for alert box
                 alert.setAlertType(Alert.AlertType.ERROR);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Publishings Manager");
@@ -238,13 +222,10 @@ public class ManagementPublishingController implements Initializable {
             }
 
         } else {
-//          set id for object publishing
             pub.setId(Integer.parseInt(id));
             if (PublishingEntity.GetPublishingWithId(pub.getId()).getName().equals(pub.getName())) {
-//              if Update success, show a box with message "Updated Successfully!" else show message "Updated Fail!"
                 if (PublishingEntity.Update(pub)) {
 
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.INFORMATION);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Publishings Manager");
@@ -253,7 +234,6 @@ public class ManagementPublishingController implements Initializable {
 
                 } else {
 
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Publishings Manager");
@@ -265,10 +245,8 @@ public class ManagementPublishingController implements Initializable {
             } else {
 
                 if (PublishingEntity.GetPublishingWithName(name) == null) {
-//              if Update success, show a box with message "Updated Successfully!" else show message "Updated Fail!"
                     if (PublishingEntity.Update(pub)) {
 
-//              set titile, header, content for alert box
                         alert.setAlertType(Alert.AlertType.INFORMATION);
                         alert.setTitle("Test Connection");
                         alert.setHeaderText("Publishings Manager");
@@ -277,7 +255,6 @@ public class ManagementPublishingController implements Initializable {
 
                     } else {
 
-//              set titile, header, content for alert box
                         alert.setAlertType(Alert.AlertType.ERROR);
                         alert.setTitle("Test Connection");
                         alert.setHeaderText("Publishings Manager");
@@ -287,7 +264,6 @@ public class ManagementPublishingController implements Initializable {
                     }
 
                 } else {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Publishings Manager");
@@ -306,20 +282,16 @@ public class ManagementPublishingController implements Initializable {
         ObservableList<Book> existsBook = BookEntity.GetBookByCategoryId(id);
         ObservableList<Book> noBook = FXCollections.observableArrayList();
 
-//      Call Alert box
         Alert alert = new Alert(Alert.AlertType.NONE);
 
         if (existsBook.equals(noBook) || existsBook.equals(null)) {
-//          delete data for database, if success show message "Deleted successfully !" else show message "Delete Fail !"
             if (PublishingEntity.Delete(id)) {
-//          set titile, header, content for alert box
                 alert.setAlertType(Alert.AlertType.INFORMATION);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Publishing Manager");
                 alert.setContentText("Deleted Successfully!");
                 alert.showAndWait();
             } else {
-//          set titile, header, content for alert box
                 alert.setAlertType(Alert.AlertType.ERROR);
                 alert.setTitle("Test Connection");
                 alert.setHeaderText("Publishing Manager");

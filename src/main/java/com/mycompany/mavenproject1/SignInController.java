@@ -51,7 +51,6 @@ public class SignInController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         initClock();
         Validated();
         errorPassword.setVisible(false);
@@ -71,7 +70,6 @@ public class SignInController implements Initializable {
             inpPassword = showPassword;
         }
 
-//      Call Alert box
         Alert alert = new Alert(Alert.AlertType.NONE);
         Account acc = AccountEntity.GetAccountByUsername(inpUsername);
         if (acc != null) {

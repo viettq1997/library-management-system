@@ -504,7 +504,7 @@
    </children>
    <stylesheets>
       <URL value="@../../../CSS/button.css" />
-      <URL value="@../../../CSS/images.css" />
+<!--      <URL value="@../../../CSS/images.css" />-->
       <URL value="@../../../CSS/combo_box.css" />
    </stylesheets>
 </AnchorPane>

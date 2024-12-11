@@ -96,7 +96,6 @@ public class CustomerInfomationController implements Initializable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-//      run real time and replace a time String for labelClock
         initClock();
     }
 

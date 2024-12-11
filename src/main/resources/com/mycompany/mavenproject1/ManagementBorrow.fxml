@@ -406,7 +406,7 @@
    </effect>
    <stylesheets>
       <URL value="@../../../CSS/admin_index.css" />
-      <URL value="@../../../CSS/images.css" />
+<!--      <URL value="@../../../CSS/images.css" />-->
       <URL value="@../../../CSS/table.css" />
       <URL value="@../../../CSS/combo_box.css" />
       <URL value="@../../../CSS/button.css" />

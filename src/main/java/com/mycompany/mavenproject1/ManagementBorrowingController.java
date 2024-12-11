@@ -72,14 +72,8 @@ public class ManagementBorrowingController implements Initializable {
 
     @FXML
     public void CheckId() {
-//      get value of UID feild
         String id = txtID.getText();
-//      Set button delete disable when UID is empty else unset disable
-        if (id.isEmpty()) {
-            btnDelete.setDisable(true);
-        } else {
-            btnDelete.setDisable(false);
-        }
+        btnDelete.setDisable(id.isEmpty());
     }
 
     @FXML
@@ -135,9 +129,7 @@ public class ManagementBorrowingController implements Initializable {
     private void BtnSaveClick() {
         Validated();
         try {
-//      Call Alert box
             Alert alert = new Alert(Alert.AlertType.NONE);
-//      inpId is empty we create new categories else we update this
             if (txtID.getText().isEmpty()) {
 
                 int accountId = BorrowEntity.selectAccountIndex(txtAccount);
@@ -148,34 +140,22 @@ public class ManagementBorrowingController implements Initializable {
                 borrow.setRefundAt(txtRefundAt.getValue().toString());
                 borrow.setBorrowAt(txtBorrowAt.getValue().toString());
                 borrow.setStatusId(statusId);
-//                borrow.setTime_out();
                 borrow.setAccountID(accountId);
                 borrow.setBookID(bookId);
                 System.out.println(borrow);
                 if (BorrowEntity.Add(borrow)) {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.INFORMATION);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Borrows Manager");
                     alert.setContentText("Added Successfully!");
                     alert.showAndWait();
                 } else {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Borrows Manager");
                     alert.setContentText("Added Fail!");
                     alert.showAndWait();
-//                }
                 }
-//            else {
-////              set titile, header, content for alert box
-//                alert.setAlertType(Alert.AlertType.ERROR);
-//                alert.setTitle("Test Connection");
-//                alert.setHeaderText("Borrows Manager");
-//                alert.setContentText("This Publishing exists!");
-//                alert.showAndWait();
-//            }
             } else {
                 int accountId = BorrowEntity.selectAccountIndex(txtAccount);
                 int bookId = BorrowEntity.selectBookIndex(txtBook);
@@ -192,16 +172,13 @@ public class ManagementBorrowingController implements Initializable {
                 borrow.setAccountID(accountId);
                 borrow.setBookID(bookId);
 
-//          if Update success, show a box with message "Updated Successfully!" else show message "Updated Fail!"
                 if (BorrowEntity.Update(borrow)) {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.INFORMATION);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Borrows Manager");
                     alert.setContentText("Updated Successfully!");
                     alert.showAndWait();
                 } else {
-//              set titile, header, content for alert box
                     alert.setAlertType(Alert.AlertType.ERROR);
                     alert.setTitle("Test Connection");
                     alert.setHeaderText("Borrows Manager");
@@ -209,8 +186,7 @@ public class ManagementBorrowingController implements Initializable {
                     alert.showAndWait();
                 }
             }
-        } catch (NullPointerException e) {
-        } catch (RuntimeException r) {
+        } catch (RuntimeException ignored) {
         }
 
         RefreshData();
@@ -219,19 +195,15 @@ public class ManagementBorrowingController implements Initializable {
     @FXML
     private void BtnDeleteClick() {
         int id = Integer.parseInt(txtID.getText());
-//      Call Alert box
         Alert alert = new Alert(Alert.AlertType.NONE);
 
-//      delete data for database, if success show message "Deleted successfully !" else show message "Delete Fail !"
         if (BorrowEntity.Delete(id)) {
-//          set titile, header, content for alert box
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setTitle("Test Connection");
             alert.setHeaderText("Borrows Manager");
             alert.setContentText("Deleted Successfully!");
             alert.showAndWait();
         } else {
-//          set titile, header, content for alert box
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setTitle("Test Connection");
             alert.setHeaderText("Borrows Manager");

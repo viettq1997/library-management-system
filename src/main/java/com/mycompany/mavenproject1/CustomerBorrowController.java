@@ -65,8 +65,7 @@ public class CustomerBorrowController implements Initializable {
     private Button btnSearch;
     @FXML
     private TextField txtSearch;
-//    @FXML
-//    private Button btnBooking;
+
     @FXML
     private Label errorBook;
 
@@ -90,7 +89,6 @@ public class CustomerBorrowController implements Initializable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-//      run real time and replace a time String for labelClock
         initClock();
         initBoxAuthors();
         initBoxCategory();
@@ -100,7 +98,6 @@ public class CustomerBorrowController implements Initializable {
 
     @FXML
     private void ValidatedFilter() {
-        boolean flag = false;
 
         Publishing pub = boxPublishing.getValue();
         Category cat = boxCategory.getValue();
@@ -111,30 +108,25 @@ public class CustomerBorrowController implements Initializable {
             errorBook.setText("Choose a Publishing, a Author and a Category!");
             errorBook.setVisible(true);
 
-            flag = true;
         } else {
             initBoxBook(pub, author, cat);
             errorBook.setVisible(false);
         }
 
-        boxBook.setDisable(flag);
     }
 
     @FXML
     private void ValidatedBook() {
-        boolean flag = false;
 
         if (boxBook.getValue() == null) {
             boxBook.setPromptText("Choose a Book!");
             errorBook.setText("Choose a Book!");
             errorBook.setVisible(true);
 
-            flag = true;
         } else {
             errorBook.setVisible(false);
         }
 
-//        btnBooking.setDisable(flag);
     }
 
     @FXML
@@ -158,88 +150,12 @@ public class CustomerBorrowController implements Initializable {
     }
 
     @FXML
-    private void BtnBooking() {
-//      Call Alert box
-        Alert alert = new Alert(Alert.AlertType.NONE);
-
-        StatusManage borrowStatusManage = StatusManageEntity.GetStatusManageByName("Borrowed");
-        StatusManage outOfStockStatusManage = StatusManageEntity.GetStatusManageByName("Out Of Stock");
-        StatusBorrow borrowStatusBorrow = StatusBorrowEntity.GetStatusBorrowWithName("Borrowing");
-
-        Account acc = AccountEntity.GetAccountByUsername(user.getUserName());
-
-        Book book = boxBook.getValue();
-        ManageBook mg = new ManageBook();
-        mg.setPricePerBook(book.getPrice());
-        mg.getBook().setId(book.getId());
-        mg.getAccount().setId(acc.getId());
-        if (book.getQuantity() == 0) {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Message.fxml"));
-            try {
-                alert.setDialogPane(loader.load());
-                MessageController mc = loader.getController();
-                mc.setMessage("The library is out of this books!");
-            } catch (Exception e) {
-            }
-
-            alert.showAndWait();
-            mg.getStatus().setId(outOfStockStatusManage.getId());
-
-            RefreshData();
-        } else {
-            int newQuantityBook = book.getQuantity() - 1;
-            book.setQuantity(newQuantityBook);
-
-            if (newQuantityBook == 0) {
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Message.fxml"));
-                try {
-                    alert.setDialogPane(loader.load());
-                    MessageController mc = loader.getController();
-                    mc.setMessage("The library is out of this books! You were the last to choose it!");
-                } catch (Exception e) {
-                }
-
-                alert.showAndWait();
-                mg.getStatus().setId(outOfStockStatusManage.getId());
-            } else {
-                mg.getStatus().setId(borrowStatusManage.getId());
-            }
-
-            ManageBookEntity.Add(mg);
-            BookEntity.Update(book);
-
-            ObservableList<ManageBook> newMg = ManageBookEntity.GetAllBookBorrowByUID(acc.getUID());
-            ManageBook newBook = newMg.get(newMg.size() - 1);
-            Borrow br = new Borrow();
-            br.setAmount_of_pay(book.getPrice());
-            br.setManageId(newBook.getId());
-            br.setTime_out(3);
-            LocalDate preDate = LocalDate.now();
-            LocalDate refundAt = preDate.withDayOfYear(preDate.getDayOfYear() + 3);
-            br.setRefundAt(refundAt.toString());
-            br.setStatusId(borrowStatusBorrow.getId());
-
-            BorrowEntity bre = new BorrowEntity();
-            bre.Add(br);
-            RefreshData();
-        }
-    }
-
-    @FXML
     private void ResetField() {
         boxAuthor.setValue(null);
         boxBook.setValue(null);
         boxPublishing.setValue(null);
         boxCategory.setValue(null);
         errorBook.setVisible(false);
-    }
-
-    @FXML
-    private void RefreshData() {
-        ResetField();
-        InitData();
     }
 
     @FXML
