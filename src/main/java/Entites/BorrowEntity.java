@@ -22,7 +22,7 @@ public class BorrowEntity {
     public static ObservableList<Borrow> GetAll() {
         ObservableList<Borrow> list = FXCollections.observableArrayList();
         String query = """
-                Select bw.id,a.UID,bw.amount_of_pay, b.name as bookName,bw.borrowAt,bw.refundAt ,bw.time_out,sb.name as stautsName,a.username as accountName,bw.statusId,bw.accountId, mb.bookId,bw.manageId from borrow as bw
+                Select bw.id,a.UID,bw.amount_of_pay, b.name as bookName,bw.borrowAt,bw.refundAt ,sb.name as stautsName,a.username as accountName,bw.statusId,bw.accountId, mb.bookId,bw.manageId from borrow as bw
                  join status_borrow as sb on bw.statusId = sb.id
                  join manage_book as mb on bw.manageId = mb.id
                  join accounts as a on bw.accountId = a.id
@@ -37,7 +37,6 @@ public class BorrowEntity {
                 borrow.setIndex(i);
                 borrow.setId(rs.getInt("id"));
                 borrow.setBorrowAt(rs.getString("borrowAt"));
-                borrow.setTime_out(rs.getInt("time_out"));
                 borrow.setRefundAt(rs.getString("refundAt"));
                 borrow.setAmount_of_pay(rs.getFloat("amount_of_pay"));
                 borrow.setManageId(rs.getInt("manageId"));
@@ -77,7 +76,6 @@ public class BorrowEntity {
                 borrow.setIndex(i);
                 borrow.setId(rs.getInt("id"));
                 borrow.setBorrowAt(rs.getString("borrowAt"));
-                borrow.setTime_out(rs.getInt("time_out"));
                 borrow.setRefundAt(rs.getString("refundAt"));
                 borrow.setAmount_of_pay(rs.getFloat("amount_of_pay"));
                 borrow.setManageId(rs.getInt("manageId"));
@@ -119,7 +117,6 @@ public class BorrowEntity {
                 borrow.setIndex(i);
                 borrow.setId(rs.getInt("id"));
                 borrow.setBorrowAt(rs.getString("borrowAt"));
-                borrow.setTime_out(rs.getInt("time_out"));
                 borrow.setRefundAt(rs.getString("refundAt"));
                 borrow.setAmount_of_pay(rs.getFloat("amount_of_pay"));
                 borrow.setManageId(rs.getInt("manageId"));
@@ -143,7 +140,7 @@ public class BorrowEntity {
 
     public static ObservableList<Borrow> Search(String name) {
         ObservableList<Borrow> list = FXCollections.observableArrayList();
-        String query = "Select bw.id,a.UID,bw.amount_of_pay, b.name as bookName,bw.borrowAt,bw.refundAt ,bw.time_out,sb.name as stautsName,a.username as accountName,bw.statusId,bw.accountId, mb.bookId,bw.manageId from borrow as bw\n"
+        String query = "Select bw.id,a.UID,bw.amount_of_pay, b.name as bookName,bw.borrowAt,bw.refundAt ,sb.name as stautsName,a.username as accountName,bw.statusId,bw.accountId, mb.bookId,bw.manageId from borrow as bw\n"
                 + " join status_borrow as sb on bw.statusId = sb.id\n"
                 + " join manage_book as mb on bw.manageId = mb.id\n"
                 + " join accounts as a on bw.accountId = a.id\n"
@@ -158,7 +155,6 @@ public class BorrowEntity {
                 borrow.setIndex(i);
                 borrow.setId(rs.getInt("id"));
                 borrow.setBorrowAt(rs.getString("borrowAt"));
-                borrow.setTime_out(rs.getInt("time_out"));
                 borrow.setRefundAt(rs.getString("refundAt"));
                 borrow.setAmount_of_pay(rs.getFloat("amount_of_pay"));
                 borrow.setManageId(rs.getInt("manageId"));
@@ -181,7 +177,7 @@ public class BorrowEntity {
     }
 
     public static boolean Add(Borrow obj) {
-        String query = "INSERT INTO borrow (borrowAt, time_out, refundAt, amount_of_pay, manageId, statusId, accountId) VALUES (?, ?, ?, ? ,? ,?, ?)";
+        String query = "INSERT INTO borrow (borrowAt, refundAt, amount_of_pay, manageId, statusId, accountId) VALUES (?, ?, ?, ? ,? ,?, ?)";
         try {
             connection = JDBCConnect.getJDBCConnection();
 
@@ -189,7 +185,6 @@ public class BorrowEntity {
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, DateUtil.convertStringToDate(obj.getBorrowAt()));
-            preparedStatement.setInt(2, obj.getTime_out());
             preparedStatement.setDate(3, DateUtil.convertStringToDate(obj.getRefundAt()));
             preparedStatement.setFloat(4, obj.getAmount_of_pay());
             preparedStatement.setInt(5, id);
