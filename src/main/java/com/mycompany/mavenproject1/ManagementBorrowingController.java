@@ -348,6 +348,7 @@ public class ManagementBorrowingController implements Initializable {
         btnSave.setDisable(true);
         CheckId();
         this.data_Box();
+        ResetField();
     }
 
 }
