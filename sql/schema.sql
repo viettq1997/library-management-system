@@ -89,7 +89,6 @@ create table borrow (
 	id BIGSERIAL PRIMARY KEY,
 	borrowAt date,
     refundAt date,
-    time_out int,
     amount_of_pay float,
     manageId int,
     statusId int,
@@ -100,7 +99,6 @@ create table borrow (
 );
 
 INSERT INTO roles (name) VALUES ('Admin');
-INSERT INTO roles (name) VALUES ('Librarian');
 INSERT INTO roles (name) VALUES ('Reader');
 
 INSERT INTO accounts

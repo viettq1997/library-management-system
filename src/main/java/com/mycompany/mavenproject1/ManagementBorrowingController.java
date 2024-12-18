@@ -46,7 +46,7 @@ public class ManagementBorrowingController implements Initializable {
     private Button btnDelete;
 
     @FXML
-    private TextField txtID, txtTimeOut, txtSearch;
+    private TextField txtID, txtSearch;
 
     @FXML
     private ComboBox txtAccount, txtBook, txtStatus;
@@ -58,7 +58,7 @@ public class ManagementBorrowingController implements Initializable {
     private Label errorAccount, errorBorrowAt, errorBook, errorRefundAt, errorStatus;
 
     @FXML
-    private TableColumn<Borrow, String> colIndex, colUID, colBook, colBorrow, colRefund, colTime, colStatus;
+    private TableColumn<Borrow, String> colIndex, colUID, colBook, colBorrow, colRefund, colStatus;
 
     private void initClock() {
 
@@ -216,7 +216,6 @@ public class ManagementBorrowingController implements Initializable {
     @FXML
     private void ResetField() {
         txtID.clear();
-        txtTimeOut.clear();
         txtAccount.setValue(null);
         txtBook.setValue(null);
         txtStatus.setValue(null);
@@ -266,7 +265,6 @@ public class ManagementBorrowingController implements Initializable {
         colBook.setCellValueFactory(f -> f.getValue().bookNameProperty());
         colBorrow.setCellValueFactory(f -> f.getValue().borrowAtProperty());
         colRefund.setCellValueFactory(f -> f.getValue().refundAtProperty());
-        colTime.setCellValueFactory(f -> f.getValue().time_outProperty().asString());
         colStatus.setCellValueFactory(f -> f.getValue().statusNameProperty());
 
         table.setRowFactory(tv -> {
@@ -286,7 +284,6 @@ public class ManagementBorrowingController implements Initializable {
 
                     txtID.setText(String.valueOf(table.getItems().get(myIndex).getId()));
                     txtAccount.setValue(table.getItems().get(myIndex).getAccountName());
-                    txtTimeOut.setText(String.valueOf(table.getItems().get(myIndex).getTime_out()));
                     txtBook.setValue(table.getItems().get(myIndex).getBookName());
                     txtStatus.setValue(table.getItems().get(myIndex).getStatusName());
 
