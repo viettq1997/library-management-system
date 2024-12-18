@@ -82,22 +82,14 @@
                                  </font>
                               </Label>
                               <TextField fx:id="txtUsername" layoutX="120.0" layoutY="65.0" onInputMethodTextChanged="#Validated" onKeyReleased="#Validated" prefHeight="26.0" prefWidth="300.0" promptText="Enter username" />
-                              <Label fx:id="errorUsername" layoutX="131.0" layoutY="86.0" styleClass="error" text="Cannot be null and less than 64 character!" visible="false">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
+                              <Label fx:id="errorUsername" layoutX="120.0" layoutY="90.0" styleClass="error" text="Cannot be null and less than 64 character!" />
                               <Label layoutX="40.0" layoutY="115.0" text="Password">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="txtPassword" layoutX="120.0" layoutY="110.0" onKeyReleased="#Validated" prefHeight="26.0" prefWidth="300.0" promptText="Enter a password" />
-                              <Label fx:id="errorPassword" layoutX="133.0" layoutY="136.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" styleClass="error" text="Must have at least once(a digit, a lower case letter), at least 8 and at most 20 places" visible="false" wrapText="true">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
+                              <Label fx:id="errorPassword" layoutX="120.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="error" text="Have at least one digit or lower case letter, 8-20 words" wrapText="true" />
                               <Label layoutX="40.0" layoutY="160.0" text="Full Name">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
@@ -115,18 +107,14 @@
                                  </font>
                               </Label>
                               <ComboBox fx:id="boxGender" layoutX="120.0" layoutY="200.0" onAction="#Validated" prefHeight="26.0" prefWidth="300.0" promptText="Please choose a gender!" styleClass="combo-box" />
-                              <Label fx:id="errorGender" layoutX="131.0" layoutY="263.0" styleClass="error" text="Select your gender!" visible="false">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
+                              <Label fx:id="errorGender" layoutX="120.0" layoutY="270.0" styleClass="error" text="Select your gender!" visible="false" />
                               <Label layoutX="40.0" layoutY="250.0" text="Role">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                               </Label>
                               <ComboBox fx:id="boxRole" layoutX="120.0" layoutY="245.0" onAction="#Validated" prefHeight="26.0" prefWidth="300.0" promptText="Please choose a Role!" styleClass="combo-box" />
-                              <Label fx:id="errorRole" layoutX="131.0" layoutY="313.0" styleClass="error" text="Select a role!" visible="false">
+                              <Label fx:id="errorRole" layoutX="120.0" layoutY="270.0" styleClass="error" text="Select a role!" visible="false">
                                  <font>
                                     <Font size="13.0" />
                                  </font>

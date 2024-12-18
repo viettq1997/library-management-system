@@ -26,8 +26,8 @@
                   <VBox alignment="CENTER" prefHeight="0.0" prefWidth="0.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Pane layoutX="20.0" prefHeight="800.0" prefWidth="380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TextField fx:id="txtPassword" layoutX="190.0" layoutY="400.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Password" visible="false" />
-                        <PasswordField fx:id="passPassword" layoutX="190.0" layoutY="400.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Password" />
+                        <TextField fx:id="txtPassword" focusTraversable="false" layoutX="190.0" layoutY="400.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Password" visible="false" />
+                        <PasswordField fx:id="passPassword" focusTraversable="false" layoutX="190.0" layoutY="400.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Password" />
                         <Button fx:id="btnSubmit" layoutX="190.0" layoutY="550.0" mnemonicParsing="false" onAction="#Login" prefHeight="40.0" prefWidth="400.0" styleClass="button_submit" text="Login" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
@@ -57,12 +57,12 @@
                               <Image url="@../../../Images/Logo.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" layoutY="220.0" prefWidth="780.0" text="Welcome to Westmaster">
+                        <Label alignment="CENTER" layoutY="220.0" prefWidth="780.0" text="Welcome to Library">
                            <font>
                               <Font name="System Bold" size="25.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtUsername" layoutX="190.0" layoutY="335.0" maxHeight="40.0" maxWidth="400.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Username" />
+                        <TextField fx:id="txtUsername" focusTraversable="false" layoutX="190.0" layoutY="335.0" maxHeight="40.0" maxWidth="400.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Username" />
                      </children>
                   </Pane>
                </children>
@@ -88,7 +88,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <GridPane layoutX="5.0" layoutY="594.0" prefHeight="125.0" prefWidth="381.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <GridPane layoutX="5.0" layoutY="594.0" prefHeight="125.0" prefWidth="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="141.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="120.0" />

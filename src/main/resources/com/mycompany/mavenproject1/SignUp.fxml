@@ -37,9 +37,9 @@
                               <Image url="@../../../Images/Logo.png" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="txtUsername" layoutX="190.0" layoutY="270.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Username" />
-                        <TextField fx:id="txtPassword" layoutX="190.0" layoutY="335.0" onAction="#Validated" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Password" visible="false" />
-                        <PasswordField fx:id="passPassword" layoutX="190.0" layoutY="335.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Password" />
+                        <TextField fx:id="txtUsername" focusTraversable="false" layoutX="190.0" layoutY="270.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Username" />
+                        <TextField fx:id="txtPassword" focusTraversable="false" layoutX="190.0" layoutY="335.0" onAction="#Validated" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Password" visible="false" />
+                        <PasswordField fx:id="passPassword" focusTraversable="false" layoutX="190.0" layoutY="335.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Password" />
                         <Button fx:id="hidePassword" alignment="BASELINE_RIGHT" layoutX="530.0" layoutY="340.0" mnemonicParsing="false" onAction="#HidePassword" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: transparent;" text="Hide" visible="false">
                            <font>
                               <Font size="14.0" />
@@ -50,8 +50,8 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="txtRePassword" layoutX="190.0" layoutY="400.0" onAction="#Validated" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Confirm Password" visible="false" />
-                        <PasswordField fx:id="passRePassword" layoutX="190.0" layoutY="400.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Confirm Password" />
+                        <TextField fx:id="txtRePassword" focusTraversable="false" layoutX="190.0" layoutY="400.0" onAction="#Validated" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Confirm Password" visible="false" />
+                        <PasswordField fx:id="passRePassword" focusTraversable="false" layoutX="190.0" layoutY="400.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Confirm Password" />
                         <Button fx:id="hideRePassword" alignment="BASELINE_RIGHT" layoutX="530.0" layoutY="405.0" mnemonicParsing="false" onAction="#HideRePassword" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: transparent;" text="Hide" visible="false">
                            <font>
                               <Font size="14.0" />
@@ -76,13 +76,13 @@
                               <Font size="14.0" />
                            </font></Label>
                         <ComboBox fx:id="boxGender" layoutX="190.0" layoutY="530.0" onAction="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Select gender" />
-                        <TextField fx:id="txtMobile" layoutX="190.0" layoutY="595.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Mobile" />
+                        <TextField fx:id="txtMobile" focusTraversable="false" layoutX="190.0" layoutY="595.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Mobile" />
                         <Label fx:id="errorUsername" layoutX="190.0" layoutY="303.0" prefWidth="500.0" styleClass="error" text="Cannot be null and less than 64 character!" visible="false" />
                         <Label fx:id="errorPassword" layoutX="190.0" layoutY="380.0" prefWidth="500.0" styleClass="error" text="At least once(a digit, a lower case letter), at least 8 and at most 20 characters" visible="false" />
                         <Label fx:id="errorRePassword" layoutX="190.0" layoutY="445.0" prefWidth="500.0" styleClass="error" text="Password does not match" visible="false" />
                         <Label fx:id="errorGender" layoutX="190.0" layoutY="575.0" prefWidth="500.0" styleClass="error" text="Select a Gender" visible="false" />
                         <Label fx:id="errorMobile" layoutX="190.0" layoutY="640.0" prefWidth="500.0" styleClass="error" text="Have 10 numbers" visible="false" />
-                        <TextField fx:id="txtFullname" layoutX="190.0" layoutY="465.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Fullname" />
+                        <TextField fx:id="txtFullname" focusTraversable="false" layoutX="190.0" layoutY="465.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Fullname" />
                         <Label fx:id="errorFullname" layoutX="190.0" layoutY="510.0" styleClass="error" text="Cannot be null and less than 64 character!" visible="false" />
                      </children>
                   </Pane>

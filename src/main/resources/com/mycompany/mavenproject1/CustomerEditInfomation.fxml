@@ -314,7 +314,7 @@
                               <Image url="@../../../Images/Logo.png" />
                            </image>
                         </ImageView>
-                        <Label text="Westmaster" textFill="#c5a476">
+                        <Label text="Library" textFill="#c5a476">
                            <font>
                               <Font name="System Bold Italic" size="32.0" />
                            </font>
