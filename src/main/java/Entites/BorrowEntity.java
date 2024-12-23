@@ -177,7 +177,7 @@ public class BorrowEntity {
     }
 
     public static boolean Add(Borrow obj) {
-        String query = "INSERT INTO borrow (borrowAt, refundAt, amount_of_pay, manageId, statusId, accountId) VALUES (?, ?, ?, ? ,? ,?, ?)";
+        String query = "INSERT INTO borrow (borrowAt, refundAt, amount_of_pay, manageId, statusId, accountId) VALUES (?, ?, ? ,? ,?, ?)";
         try {
             connection = JDBCConnect.getJDBCConnection();
 
@@ -185,11 +185,11 @@ public class BorrowEntity {
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, DateUtil.convertStringToDate(obj.getBorrowAt()));
-            preparedStatement.setDate(3, DateUtil.convertStringToDate(obj.getRefundAt()));
-            preparedStatement.setFloat(4, obj.getAmount_of_pay());
-            preparedStatement.setInt(5, id);
-            preparedStatement.setInt(6, obj.getStatusId());
-            preparedStatement.setInt(7, obj.getAccountid().get());
+            preparedStatement.setDate(2, DateUtil.convertStringToDate(obj.getRefundAt()));
+            preparedStatement.setFloat(3, obj.getAmount_of_pay());
+            preparedStatement.setInt(4, id);
+            preparedStatement.setInt(5, obj.getStatusId());
+            preparedStatement.setInt(6, obj.getAccountid().get());
 
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
