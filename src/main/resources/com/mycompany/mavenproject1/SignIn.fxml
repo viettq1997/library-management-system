@@ -17,48 +17,52 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1180.0" style="-fx-background-color: #ffffff;" stylesheets="@../../../CSS/auth.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.mavenproject1.SignInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1180.0" style="-fx-background-color: #ffffff;" stylesheets="@../../../CSS/auth.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.mavenproject1.SignInController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="20.0" prefHeight="503.0" prefWidth="380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                  <VBox alignment="CENTER" prefHeight="0.0" prefWidth="0.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Pane layoutX="20.0" prefHeight="800.0" prefWidth="380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TextField fx:id="txtUsername" layoutX="164.0" layoutY="336.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Username" />
-                        <TextField fx:id="txtPassword" layoutX="164.0" layoutY="386.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Password" visible="false" />
-                        <PasswordField fx:id="passPassword" layoutX="164.0" layoutY="386.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Password" />
-                        <Button fx:id="btnSubmit" layoutX="175.0" layoutY="477.0" mnemonicParsing="false" onAction="#Login" prefHeight="40.0" prefWidth="390.0" styleClass="button_submit" text="Login" textFill="WHITE">
+                        <TextField fx:id="txtPassword" focusTraversable="false" layoutX="190.0" layoutY="400.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Password" visible="false" />
+                        <PasswordField fx:id="passPassword" focusTraversable="false" layoutX="190.0" layoutY="400.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Password" />
+                        <Button fx:id="btnSubmit" layoutX="190.0" layoutY="550.0" mnemonicParsing="false" onAction="#Login" prefHeight="40.0" prefWidth="400.0" styleClass="button_submit" text="Login" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font></Button>
-                        <Button fx:id="btnSignUp" layoutX="461.0" layoutY="433.0" mnemonicParsing="false" onAction="#switchToSignUp" prefHeight="40.0" text="Create An Account" />
-                        <Label alignment="CENTER" layoutX="226.0" layoutY="250.0" text="Welcome to Westmaster">
+                        <Button fx:id="btnSignUp" layoutX="530.0" layoutY="455.0" mnemonicParsing="false" onAction="#switchToSignUp" prefHeight="40.0" prefWidth="70.0" text="Sign Up" textFill="#2200ff">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="hide" alignment="BASELINE_RIGHT" layoutX="530.0" layoutY="405.0" mnemonicParsing="false" onAction="#HidePassword" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: transparent;" text="Hide">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="show" alignment="BASELINE_RIGHT" layoutX="530.0" layoutY="405.0" mnemonicParsing="false" onAction="#ShowPassword" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: transparent;" text="Show">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="390.0" layoutY="465.0" text="Don't have an account?">
+                           <font>
+                              <Font size="14.0" />
                            </font>
                         </Label>
-                        <Button fx:id="hide" alignment="BASELINE_RIGHT" layoutX="504.0" layoutY="391.0" mnemonicParsing="false" onAction="#HidePassword" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: transparent;" text="Hide">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="show" alignment="BASELINE_RIGHT" layoutX="506.0" layoutY="391.0" mnemonicParsing="false" onAction="#ShowPassword" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: transparent;" text="Show">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="289.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+                        <Label fx:id="errorPassword" layoutX="190.0" layoutY="445.0" prefWidth="500.0" styleClass="error" text="At least once(a digit, a lower case letter), at least 8 and at most 20 characters" visible="false" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="315.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../Images/Logo.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="164.0" layoutY="443.0" text="If you don't have an account">
+                        <Label alignment="CENTER" layoutY="220.0" prefWidth="780.0" text="Welcome to Library">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="System Bold" size="25.0" />
                            </font>
                         </Label>
-                        <Label fx:id="errorPassword" layoutX="164.0" layoutY="426.0" styleClass="error" text="At least once(a digit, a lower case letter), at least 8 and at most 20 characters" visible="false" />
+                        <TextField fx:id="txtUsername" focusTraversable="false" layoutX="190.0" layoutY="335.0" maxHeight="40.0" maxWidth="400.0" onKeyReleased="#Validated" prefHeight="40.0" prefWidth="400.0" promptText="Username" />
                      </children>
                   </Pane>
                </children>
@@ -68,9 +72,9 @@
             </AnchorPane>
          </center>
          <left>
-            <AnchorPane prefHeight="730.0" prefWidth="400.0" style="-fx-background-color: silver;" styleClass="auth" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="730.0" prefWidth="400.0" style="-fx-background-color: CCB595;" styleClass="auth" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="612.0" fitWidth="401.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="217.9031982421875" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ImageView fitHeight="612.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="217.9031982421875" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <image>
                         <Image url="@../../../Images/Harry-Potter-va-hoi-phuong-hoang.jpg" />
                      </image>
@@ -84,7 +88,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <GridPane layoutX="5.0" layoutY="594.0" prefHeight="125.0" prefWidth="381.0">
+                  <GridPane layoutX="5.0" layoutY="594.0" prefHeight="125.0" prefWidth="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="141.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="120.0" />
@@ -96,12 +100,12 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Monday-Friday:" GridPane.rowIndex="1">
+                        <Label text="Monday-Friday:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label text="Saturday:" GridPane.rowIndex="2">
+                        <Label text="Saturday:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
