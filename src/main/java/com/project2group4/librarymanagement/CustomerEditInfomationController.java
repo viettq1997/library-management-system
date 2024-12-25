@@ -4,6 +4,7 @@ import com.project2group4.librarymanagement.Entites.AccountEntity;
 import com.project2group4.librarymanagement.Models.Account;
 import com.project2group4.librarymanagement.Models.Gender;
 import com.project2group4.librarymanagement.Models.User;
+
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -77,6 +78,8 @@ public class CustomerEditInfomationController implements Initializable {
     @FXML
     private Button btnSave;
 
+    private boolean isPasswordInFocus = false;
+
     /**
      * Initializes the controller class.
      */
@@ -133,7 +136,6 @@ public class CustomerEditInfomationController implements Initializable {
         Account acc = AccountEntity.GetAccountByUsername(user.getUserName());
         txtUsername.setText(acc.getUsername());
         txtFullname.setText(acc.getFull_name());
-        txtPassword.setText(acc.getPassword());
 
         boxGender.setValue(boxGender.getItems().get(acc.getGender() - 1));
 
@@ -166,22 +168,14 @@ public class CustomerEditInfomationController implements Initializable {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         String fullname = txtFullname.getText();
-        Gender gender = boxGender.getValue();
         String email = txtEmail.getText();
         LocalDate dob = datePickerDob.getValue();
         String mobile = txtMobile.getText();
 
-        if (username.isEmpty()) {
-            errorUsername.setVisible(true);
+        errorUsername.setVisible(username.isEmpty());
 
-            flag = true;
-        } else {
-            errorUsername.setVisible(false);
-        }
-
-        if (!password.matches(PASSWORD_PATTERN) || password.isEmpty()) {
+        if (isPasswordInFocus && (!password.isEmpty() && !password.matches(PASSWORD_PATTERN))) {
             errorPassword.setVisible(true);
-
             flag = true;
         } else {
             errorPassword.setVisible(false);
@@ -195,13 +189,7 @@ public class CustomerEditInfomationController implements Initializable {
             errorFullname.setVisible(false);
         }
 
-        if (gender.equals(null)) {
-            errorGender.setVisible(true);
-
-            flag = true;
-        } else {
-            errorGender.setVisible(false);
-        }
+        errorGender.setVisible(false);
 
         if (email.matches(EMAIL_PATTERN)) {
             errorEmail.setVisible(false);
@@ -231,9 +219,15 @@ public class CustomerEditInfomationController implements Initializable {
     }
 
     @FXML
-    private void BtnSaveClick() {
-        Account acc = AccountEntity.GetAccountByUsername(user.getUserName());
+    private void checkFocusPassword() {
+        isPasswordInFocus = true;
+    }
 
+    @FXML
+    private void BtnSaveClick() {
+        Account existingAcc = AccountEntity.GetAccountByUsername(user.getUserName());
+
+        Account acc = new Account();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         String fullname = txtFullname.getText();
@@ -249,6 +243,8 @@ public class CustomerEditInfomationController implements Initializable {
         acc.setEmail(email);
         acc.setDob(dob);
         acc.setMobile(mobile);
+        acc.setUID(existingAcc.getUID());
+        acc.setRoleId(existingAcc.getRoleId());
 
         Alert alert = new Alert(Alert.AlertType.NONE);
         if (!user.getUserName().equals(username)) {
@@ -261,7 +257,7 @@ public class CustomerEditInfomationController implements Initializable {
                         ConfirmPasswordController confirmPage = loader.getController();
                         if (confirmPage.Confirm()) {
                             try {
-                                if (AccountEntity.Update(acc, null)) {
+                                if (AccountEntity.Update(acc, existingAcc)) {
                                     user.setUserSession(acc.getUsername());
                                     switchToCustomerInfomation();
                                 }
@@ -294,7 +290,7 @@ public class CustomerEditInfomationController implements Initializable {
                     ConfirmPasswordController confirmPage = loader.getController();
                     if (confirmPage.Confirm()) {
                         try {
-                            if (AccountEntity.Update(acc, null)) {
+                            if (AccountEntity.Update(acc, existingAcc)) {
                                 user.setUserSession(acc.getUsername());
                                 switchToCustomerInfomation();
                             }

@@ -219,7 +219,7 @@
                                  </children>
                               </VBox>
                               <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <PasswordField fx:id="txtPassword" onKeyReleased="#Validated" promptText="Password have at least once(a digit, a lower case letter), at least 8 and at most 20 places)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <PasswordField fx:id="txtPassword" onKeyReleased="#Validated" onMouseClicked="#checkFocusPassword" promptText="Password have at least once(a digit, a lower case letter), at least 8 and at most 20 places)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <VBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
                                     <TextField fx:id="txtFullname" onKeyReleased="#Validated" promptText="Less than 64 characters">

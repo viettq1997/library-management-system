@@ -131,6 +131,8 @@ public class ManagementAccountsController implements Initializable {
     int myIndex;
     int id;
     Image av;
+    private boolean isPasswordInFocus = false;
+    private boolean isAddAccount = true;
 
     @FXML
     private void switchToAdminDashboard() throws IOException {
@@ -222,7 +224,9 @@ public class ManagementAccountsController implements Initializable {
 
                     CheckUID();
                     CheckRole();
-                    errorPassword.setVisible(false);
+                    resetErrorMessage();
+                    isPasswordInFocus = false;
+                    isAddAccount = false;
                     btnSave.setDisable(false);
                 }
             });
@@ -436,6 +440,13 @@ public class ManagementAccountsController implements Initializable {
         txtUpdatedAt.setText("");
         txtSearch.setText("");
 
+        resetErrorMessage();
+        isPasswordInFocus = false;
+        isAddAccount = true;
+        CheckUID();
+    }
+
+    private void resetErrorMessage() {
         errorUsername.setVisible(false);
         errorPassword.setVisible(false);
         errorFullname.setVisible(false);
@@ -444,8 +455,6 @@ public class ManagementAccountsController implements Initializable {
         errorEmail.setVisible(false);
         errorDob.setVisible(false);
         errorMobile.setVisible(false);
-
-        CheckUID();
     }
 
     public void CheckUID() {
@@ -460,8 +469,7 @@ public class ManagementAccountsController implements Initializable {
     }
 
     @FXML
-    private void Validated(KeyEvent event) {
-        Node source = (Node) event.getSource();
+    private void Validated() {
         boolean flag = false;
         String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=\\S+$).{8,20}$";
         String MOBILE_PATTERN = "^\\d{10}$";
@@ -481,8 +489,7 @@ public class ManagementAccountsController implements Initializable {
         } else {
             errorUsername.setVisible(false);
         }
-        TextField textField = (TextField) source;
-        if (textField == txtPassword && (password.isEmpty() || !password.matches(PASSWORD_PATTERN))) {
+        if (isAddAccount && (password.isEmpty() || !password.matches(PASSWORD_PATTERN)) || (!isAddAccount && isPasswordInFocus && (!password.isEmpty() && !password.matches(PASSWORD_PATTERN)))) {
             errorPassword.setVisible(true);
             flag = true;
         } else {
@@ -538,6 +545,11 @@ public class ManagementAccountsController implements Initializable {
         }
 
         btnSave.setDisable(flag);
+    }
+
+    @FXML
+    private void checkFocusPassword() {
+        isPasswordInFocus = true;
     }
 
     private void FormatFullName() {

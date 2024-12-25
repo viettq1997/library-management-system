@@ -88,7 +88,7 @@
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtPassword" layoutX="120.0" layoutY="110.0" onKeyReleased="#Validated" prefHeight="26.0" prefWidth="300.0" promptText="Enter a password" />
+                              <TextField fx:id="txtPassword" layoutX="120.0" layoutY="110.0" onKeyReleased="#Validated" onMouseClicked="#checkFocusPassword" prefHeight="26.0" prefWidth="300.0" promptText="Enter a password" />
                               <Label fx:id="errorPassword" layoutX="120.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="error" text="Have at least one digit or lower case letter, 8-20 words" wrapText="true" />
                               <Label layoutX="40.0" layoutY="160.0" text="Full Name">
                                  <font>
