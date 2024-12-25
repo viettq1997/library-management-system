@@ -1,0 +1,18 @@
+@startuml
+start
+:Retrieve Author ID from input;
+:Fetch books associated with Author ID;
+
+if (Author has no books?) then (Yes)
+    if (Delete Author successful?) then (Yes)
+        :Show success message: "Deleted Successfully!";
+    else (No)
+        :Show error message: "Deleted Fail!";
+    endif
+else (No)
+    :Show message: "This author has books! Delete books first.";
+endif
+
+:Refresh data display;
+stop
+@enduml

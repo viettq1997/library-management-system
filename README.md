@@ -100,3 +100,37 @@ password: password123
 
 ### Login
 ![Login](docs/design/LoginDataFLow.svg)
+
+### SignUp
+![SignUp](docs/design/SignUpDataFLow.svg)
+
+### Create or Update Account
+![Create Or Update Account](docs/design/account/CreateAccount.svg)
+### Delete Account
+![Delete Account](docs/design/account/DeleteAccount.svg)
+
+### Edit customer info
+![Edit customer info](docs/design/customer/EditCustomerInformation.svg)
+
+### Save books
+![Save book](docs/design/books/SaveBooks.svg)
+
+### Delete book
+![Delete book](docs/design/books/deletebook.svg)
+
+### Save publisher
+![Save publisher](docs/design/publisher/SavePublisher.svg)
+### delete publisher
+![delete publisher](docs/design/publisher/DeletePublisher.svg)
+### save category
+![save category](docs/design/publisher/SavePublisher.svg)
+### delete category
+![delete category](docs/design/publisher/DeletePublisher.svg)
+### save author
+![save author](docs/design/authors/CreateOrUpdateAuthor.svg)
+### delete author
+![delete author](docs/design/authors/DeleteAuthor.svg)
+### save borrowing
+![save borrowing](docs/design/borrowing/saveborrowing.svg)
+### delete borrowing
+![delete borrowing](docs/design/borrowing/DeleteBorrowing.svg)

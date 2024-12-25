@@ -1,0 +1,50 @@
+@startuml
+start
+
+:Format Input Name;
+:Retrieve Input ID and Name;
+:Create Category with Name;
+
+if (ID is empty?) then (yes)
+  :Check if Category Name exists;
+  if (Category Exists?) then (yes)
+    :Show alert "This Category exists!";
+    stop
+  else (no)
+    :Attempt to Add Category;
+    if (Add Success?) then (yes)
+      :Show alert "Added Successfully!";
+    else (no)
+      :Show alert "Added Fail!";
+    endif
+  endif
+else (no)
+  :Set Category ID;
+  :Check if Category Name has changed;
+  if (Name Changed?) then (yes)
+    :Check if Category Name exists;
+    if (Category Exists?) then (yes)
+      :Show alert "This Category exists!";
+      stop
+    else (no)
+      :Attempt to Update Category;
+      if (Update Success?) then (yes)
+        :Show alert "Updated Successfully!";
+      else (no)
+        :Show alert "Updated Fail!";
+      endif
+    endif
+  else (no)
+    :Attempt to Update Category;
+    if (Update Success?) then (yes)
+      :Show alert "Updated Successfully!";
+    else (no)
+      :Show alert "Updated Fail!";
+    endif
+  endif
+endif
+
+:Refresh UI;
+stop
+
+@enduml

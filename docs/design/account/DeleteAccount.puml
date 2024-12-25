@@ -1,0 +1,14 @@
+@startuml
+start
+:Read the UID from the input field;
+:Prepare a message box;
+
+if (Delete account by UID is successful?) then (Yes)
+    :Show a success message: "Unactived Successfully!";
+else (No)
+    :Show an error message: "Unactived Fail!";
+endif
+
+:Refresh the data on the page;
+stop
+@enduml

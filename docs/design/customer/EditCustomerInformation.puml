@@ -1,0 +1,28 @@
+@startuml
+start
+:Fetch current account details;
+:Get updated information from UI;
+
+if (Username changed?) then (Yes)
+    if (New username exists?) then (Yes)
+        :Show error message: "Username exists!";
+    else (No)
+        :Prompt password confirmation;
+        if (Password confirmed?) then (Yes)
+            :Update account;
+            :Update session and switch to customer info;
+        else (No)
+            :Cancel operation;
+        endif
+    endif
+else (No)
+    :Prompt password confirmation;
+    if (Password confirmed?) then (Yes)
+        :Update account;
+        :Update session and switch to customer info;
+    else (No)
+        :Cancel operation;
+    endif
+endif
+stop
+@enduml

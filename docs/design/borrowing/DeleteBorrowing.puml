@@ -1,0 +1,18 @@
+@startuml
+start
+
+:Retrieve ID from txtID;
+:Create Alert Object;
+
+:Delete Borrow Entity with ID;
+
+if (Delete Success?) then (yes)
+  :Show alert "Deleted Successfully!";
+else (no)
+  :Show alert "Deleted Fail!";
+endif
+
+:Refresh UI;
+stop
+
+@enduml

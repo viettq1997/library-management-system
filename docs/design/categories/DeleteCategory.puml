@@ -1,0 +1,22 @@
+@startuml
+start
+
+:Retrieve Category ID;
+:Check if Books Exist for Category;
+
+if (Books Exist?) then (yes)
+  :Show alert "This category have books! Delete books of category";
+  stop
+else (no)
+  :Attempt to Delete Category;
+  if (Delete Success?) then (yes)
+    :Show alert "Deleted Successfully!";
+  else (no)
+    :Show alert "Deleted Fail!";
+  endif
+endif
+
+:Refresh UI;
+stop
+
+@enduml

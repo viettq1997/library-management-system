@@ -147,15 +147,6 @@ public class CustomerBorrowController implements Initializable {
     }
 
     @FXML
-    private void ResetField() {
-        boxAuthor.setValue(null);
-        boxBook.setValue(null);
-        boxPublishing.setValue(null);
-        boxCategory.setValue(null);
-        errorBook.setVisible(false);
-    }
-
-    @FXML
     private void Search() {
         Account acc = AccountEntity.GetAccountByUsername(user.getUserName());
         BorrowEntity be = new BorrowEntity();
