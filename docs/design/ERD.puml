@@ -1,0 +1,134 @@
+@startchen
+skinparam height 100%
+skinparam dpi 200
+
+entity ROLES {
+  id <<key>>
+  name
+}
+
+entity ACCOUNTS {
+  id <<key>>
+  UID
+  avatar
+  username
+  password
+  full_name
+  gender
+  email
+  dob
+  mobile
+  status
+  roleId
+  createdAt
+  updatedAt
+}
+
+entity CATEGORIES {
+  id <<key>>
+  name
+  createdAt
+  updatedAt
+}
+
+entity AUTHORS {
+  id <<key>>
+  name
+  dob
+  sign_name
+  createdAt
+  updatedAt
+}
+
+entity PUBLISHING {
+  id <<key>>
+  name
+  address
+  co_year
+  createdAt
+  updatedAt
+}
+
+entity BOOKS {
+  id <<key>>
+  name
+  image
+  co_year
+  price
+  quantity
+  description
+  categoryId
+  authorId
+  publishId
+}
+
+entity STATUS_MANAGE {
+  id <<key>>
+  name
+}
+
+entity STATUS_BORROW {
+  id <<key>>
+  name
+}
+
+entity MANAGE_BOOK {
+  id <<key>>
+  price_per_book
+  accountId
+  bookId
+  statusId
+  createdAt
+  updatedAt
+}
+
+entity BORROW {
+  id <<key>>
+  borrowAt
+  refundAt
+  amount_of_pay
+  manageId
+  statusId
+  accountId
+}
+
+relationship HAS_ROLE {
+}
+
+HAS_ROLE =1= ACCOUNTS
+HAS_ROLE =1= ROLES
+
+relationship HAS_CATEGORY {
+}
+
+HAS_CATEGORY =1= BOOKS
+HAS_CATEGORY =1= CATEGORIES
+
+relationship HAS_AUTHOR {
+}
+
+HAS_AUTHOR =1= BOOKS
+HAS_AUTHOR =1= AUTHORS
+
+relationship HAS_PUBLISHER {
+}
+
+HAS_PUBLISHER =1= BOOKS
+HAS_PUBLISHER =1= PUBLISHING
+
+relationship MANAGES_BOOK {
+}
+
+MANAGES_BOOK =1= ACCOUNTS
+MANAGES_BOOK =N= MANAGE_BOOK
+MANAGES_BOOK =1= STATUS_MANAGE
+
+relationship BORROWS_BOOK {
+}
+
+BORROWS_BOOK =1= BORROW
+BORROWS_BOOK =1= MANAGE_BOOK
+BORROWS_BOOK =1= ACCOUNTS
+BORROWS_BOOK =1= STATUS_BORROW
+
+@endchen
