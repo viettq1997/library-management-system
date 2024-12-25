@@ -95,3 +95,8 @@ password: password123
 |               | manageId       | INT           | FOREIGN KEY | Management ID, references `manage_book(id)`.                   |
 |               | statusId       | INT           | FOREIGN KEY | Status ID, references `status_borrow(id)`.                     |
 |               | accountId      | INT           | FOREIGN KEY | Account ID, references `accounts(id)`.                         |
+
+## Dataflow
+
+### Login
+![Login](docs/design/LoginDataFLow.svg)

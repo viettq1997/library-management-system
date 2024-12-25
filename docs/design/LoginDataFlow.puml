@@ -1,0 +1,35 @@
+@startuml
+start
+:Read the username that the user typed;
+:Read the password. Check if the hidden password box has more characters than the visible one;
+
+if (The hidden password is longer?) then (Yes)
+    :Use the hidden password;
+else (No)
+    :Use the visible password;
+endif
+
+:Prepare a message box for later;
+:Find the account that matches the username;
+
+if (An account is found?) then (Yes)
+    :Get the stored password and role of the account;
+    if (The entered password matches the stored one?) then (Yes)
+        :Remember this user has logged in;
+
+        if (The user is an Admin?) then (Yes)
+            :Show a welcome message with the username;
+            :Take the user to the Admin's area;
+        else (The user is a Reader)
+            :Show a welcome message with the full name;
+            :Take the user to the Reader's area;
+        endif
+    else (No)
+        :Show a message saying the username or password is wrong;
+    endif
+else (No)
+    :Show a message saying the username or password is wrong;
+endif
+
+stop
+@enduml
