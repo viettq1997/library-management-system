@@ -289,7 +289,7 @@ public class AccountEntity {
             preparedStatement.setString(1, acc.getUID());
             preparedStatement.setString(2, acc.getUsername());
             preparedStatement.setString(3, acc.getAvatar());
-            preparedStatement.setString(4, acc.getPassword());
+            preparedStatement.setString(4, DigestUtils.md5Hex(acc.getPassword()));
             preparedStatement.setString(5, acc.getFull_name());
             preparedStatement.setInt(6, acc.getGender());
             preparedStatement.setString(7, acc.getEmail());

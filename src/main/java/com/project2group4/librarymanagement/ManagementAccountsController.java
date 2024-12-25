@@ -245,7 +245,7 @@ public class ManagementAccountsController implements Initializable {
 
         Account a = new Account();
         String UID = txtUID.getText();
-        String password = DigestUtils.md5Hex(txtPassword.getText());
+        String password = txtPassword.getText();
         String userName = txtUsername.getText();
         String fullName = txtFullname.getText();
         Gender gender = boxGender.getValue();
