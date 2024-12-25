@@ -63,7 +63,7 @@
                            </font>
                         </Label>
                         <DatePicker fx:id="txtDob" layoutX="570.0" layoutY="20.0" onAction="#Validated" prefHeight="26.0" prefWidth="300.0" style="-fx-background-color: #f9f7f4;" />
-                        <Label fx:id="errorDob" layoutX="567.0" layoutY="63.0" styleClass="error" text="Cannot be null and must greater than 18 years old" visible="false" />
+                        <Label fx:id="errorDob" layoutX="570.0" layoutY="45.0" styleClass="error" text="Cannot be null and must greater than 18 years old" visible="false" />
                                 <TextField fx:id="txtName" layoutX="120.0" layoutY="65.0" onInputMethodTextChanged="#Validated" onKeyReleased="#Validated" prefHeight="26.0" prefWidth="300.0" />
                                 <TextField fx:id="txtSignname" layoutX="120.0" layoutY="110.0" onInputMethodTextChanged="#Validated" onKeyReleased="#Validated" prefHeight="26.0" prefWidth="300.0" />
                                 <Button fx:id="btnSave" layoutX="29.0" layoutY="160.0" mnemonicParsing="false" onAction="#BtnSaveClick" prefHeight="30.0" prefWidth="85.0" styleClass="button_success" text="Save" />
@@ -82,8 +82,8 @@
                                     </font>
                                 </Label>
                                 <TextField fx:id="txtCreatedAt" disable="true" editable="false" layoutX="570.0" layoutY="65.0" prefHeight="26.0" prefWidth="300.0" />
-                        <Label fx:id="errorName" layoutX="131.0" layoutY="113.0" styleClass="error" text="Cannot be null and less than 64 characters" visible="false" />
-                        <Label fx:id="errorSignname" layoutX="132.0" layoutY="163.0" styleClass="error" text="Cannot be null and less than 64 characters" visible="false" />
+                        <Label fx:id="errorName" layoutX="120.0" layoutY="90.0" styleClass="error" text="Cannot be null and less than 64 characters" visible="false" />
+                        <Label fx:id="errorSignname" layoutX="120.0" layoutY="135.0" styleClass="error" text="Cannot be null and less than 64 characters" visible="false" />
                             </children>
                             <padding>
                                 <Insets bottom="20.0" left="30.0" right="20.0" top="50.0" />

@@ -51,9 +51,9 @@
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtName" layoutX="131.0" layoutY="65.0" onAction="#FomartInputName" onKeyReleased="#CheckInputName" prefHeight="26.0" prefWidth="300.0" promptText="Enter a name" />
+                              <TextField fx:id="txtName" layoutX="120.0" layoutY="65.0" onAction="#FomartInputName" onKeyReleased="#CheckInputName" prefHeight="26.0" prefWidth="300.0" promptText="Enter a name" />
                               <Button fx:id="btnSave" layoutX="29.0" layoutY="115.0" mnemonicParsing="false" onAction="#BtnSaveClick" prefHeight="30.0" prefWidth="85.0" styleClass="button_success" text="Save" />
-                              <TextField fx:id="txtId" disable="true" editable="false" layoutX="131.0" layoutY="20.0" prefHeight="26.0" prefWidth="300.0" />
+                              <TextField fx:id="txtId" disable="true" editable="false" layoutX="120.0" layoutY="20.0" prefHeight="26.0" prefWidth="300.0" />
                               <Button fx:id="btnDelete" layoutX="142.0" layoutY="115.0" mnemonicParsing="false" onAction="#BtnDeleteClick" prefHeight="30.0" prefWidth="85.0" styleClass="button_danger" stylesheets="@../../../CSS/button.css" text="Delete" />
                               <Button fx:id="btnReset" layoutX="255.0" layoutY="115.0" mnemonicParsing="false" onAction="#ResetField" prefHeight="30.0" prefWidth="85.0" styleClass="button_primary" stylesheets="@../../../CSS/button.css" text="Reset" />
                               <Label layoutX="460.0" layoutY="70.0" text="Updated At">
@@ -68,14 +68,11 @@
                                  </font>
                               </Label>
                               <TextField fx:id="txtCreatedAt" disable="true" editable="false" layoutX="570.0" layoutY="20.0" prefHeight="26.0" prefWidth="300.0" />
-                              <Label fx:id="errorName" layoutX="131.0" layoutY="113.0" text="Please enter a name !" visible="false">
+                              <Label fx:id="errorName" layoutX="120.0" layoutY="90.0" text="Please enter name !">
                                  <styleClass>
                                     <String fx:value="error" />
                                     <String fx:value="hidden" />
                                  </styleClass>
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
                               </Label>
                            </children>
                            <BorderPane.margin>
