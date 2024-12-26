@@ -181,7 +181,7 @@ public class BorrowEntity {
         try {
             connection = JDBCConnect.getJDBCConnection();
 
-            int id = newStatusID();
+            int id = getManageBookId(obj.getBookid().intValue());
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, DateUtil.convertStringToDate(obj.getBorrowAt()));
@@ -202,36 +202,33 @@ public class BorrowEntity {
         }
     }
 
-    public static int newStatusID() throws SQLException {
-        String manageId = "select id from manage_book order by id DESC LIMIT 1";
-        int id = 0;
+    public static int getManageBookId(Integer bookId) throws SQLException {
+        String manageId = "select id from manage_book where bookid = ?";
         connection = JDBCConnect.getJDBCConnection();
         preparedStatement = connection.prepareStatement(manageId);
+        preparedStatement.setInt(1, bookId);
+
         rs = preparedStatement.executeQuery();
         if (rs.next()) {
-            id = rs.getInt("id");
+            return rs.getInt("id");
         }
-        return id;
+        return -1;
     }
 
     public static boolean Update(Borrow obj) {
-        String sql_borrow = "UPDATE borrow SET borrowAt = ?,refundAt = ?,statusId = ?, accountId = ? WHERE (id = ?);";
-        String sql_manage_lib = "UPDATE manage_book SET bookId = ? WHERE (id = ?);";
+        String sql_borrow = "UPDATE borrow SET borrowAt = ?,refundAt = ?,statusId = ?, accountId = ?, manageId = ? WHERE id = ?";
 
         try {
-            System.out.println("Insert Manage_book");
+            int manageBookId = getManageBookId(obj.getBookid().intValue());
             connection = JDBCConnect.getJDBCConnection();
-            preparedStatement = connection.prepareCall(sql_manage_lib);
-            preparedStatement.setInt(1, obj.getBookid().intValue());
-            preparedStatement.setInt(2, obj.getManageId());
-            preparedStatement.executeUpdate();
 
             preparedStatement = connection.prepareStatement(sql_borrow);
             preparedStatement.setDate(1, DateUtil.convertStringToDate(obj.getBorrowAt()));
             preparedStatement.setDate(2, DateUtil.convertStringToDate(obj.getRefundAt()));
             preparedStatement.setInt(3, obj.getStatusId());
             preparedStatement.setInt(4, obj.getAccountid().intValue());
-            preparedStatement.setInt(5, obj.getId());
+            preparedStatement.setInt(5, manageBookId);
+            preparedStatement.setInt(6, obj.getId());
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
