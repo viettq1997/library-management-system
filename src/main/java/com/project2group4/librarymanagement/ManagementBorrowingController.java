@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
+
+import com.project2group4.librarymanagement.Models.User;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -35,6 +37,8 @@ public class ManagementBorrowingController implements Initializable {
     private Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
     @FXML
     private Label labelClock;
+    @FXML
+    private Label sessionUsername;
 
     int id, myIndex, manaId;
     @FXML
@@ -340,6 +344,18 @@ public class ManagementBorrowingController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        User user = User.getInstace();
+        String sessionUser = user.getUserName();
+        try {
+
+            if (sessionUser.isEmpty()) {
+                SignOut();
+            } else {
+                sessionUsername.setText(sessionUser);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         initClock();
         this.table();
         btnSave.setDisable(true);
