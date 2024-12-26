@@ -8,7 +8,6 @@ public class Borrow {
     private final IntegerProperty index;
     private final IntegerProperty id;
     private final StringProperty borrowAt;
-    private final IntegerProperty time_out;
     private final StringProperty refundAt;
     private final FloatProperty amount_of_pay;
     private final IntegerProperty manageId;
@@ -26,7 +25,6 @@ public class Borrow {
         this.index = new SimpleIntegerProperty(this, "index");
         this.id = new SimpleIntegerProperty(this, "id");
         this.borrowAt = new SimpleStringProperty(this, "borrowAt");
-        this.time_out = new SimpleIntegerProperty(this, "time_out");
         this.refundAt = new SimpleStringProperty(this, "refundAt");
         this.amount_of_pay = new SimpleFloatProperty(this, "amount_of_pay");
         this.manageId = new SimpleIntegerProperty(this, "manageId");
@@ -75,10 +73,6 @@ public class Borrow {
         return borrowAt;
     }
 
-    public IntegerProperty time_outProperty() {
-        return time_out;
-    }
-
     public StringProperty refundAtProperty() {
         return refundAt;
     }
@@ -121,14 +115,6 @@ public class Borrow {
 
     public void setBorrowAt(String borrowAt) {
         this.borrowAt.set(borrowAt);
-    }
-
-    public int getTime_out() {
-        return time_out.get();
-    }
-
-    public void setTime_out(int time_out) {
-        this.time_out.set(time_out);
     }
 
     public String getRefundAt() {
@@ -191,7 +177,6 @@ public class Borrow {
     public String toString() {
         return "Borrow{" + "id=" + id.get()
                 + ", borrowAt=" + borrowAt.get()
-                + ", time_out=" + time_out.get()
                 + ", refundAt=" + refundAt.get()
                 + ", amount_of_pay=" + amount_of_pay.get()
                 + ", manageId=" + manageId.get()

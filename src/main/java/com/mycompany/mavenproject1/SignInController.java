@@ -86,7 +86,7 @@ public class SignInController implements Initializable {
                     try {
                         alert.setDialogPane(loader.load());
                         MessageController mc = loader.getController();
-                        mc.setMessage("Login Successfully!\nWelcome to Westmaster " + acc.getUsername());
+                        mc.setMessage("Login Successfully!\nWelcome to Library " + acc.getUsername());
                     } catch (Exception e) {
                     }
                     alert.showAndWait();
@@ -98,7 +98,7 @@ public class SignInController implements Initializable {
                     try {
                         alert.setDialogPane(loader.load());
                         MessageController mc = loader.getController();
-                        mc.setMessage("Login Successfully!\nWelcome to Westmaster " + acc.getFull_name());
+                        mc.setMessage("Login Successfully!\nWelcome to Library " + acc.getFull_name());
                     } catch (Exception e) {
                     }
                     alert.showAndWait();
