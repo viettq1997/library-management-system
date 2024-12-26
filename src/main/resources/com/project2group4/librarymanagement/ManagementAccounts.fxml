@@ -82,76 +82,56 @@
                                  </font>
                               </Label>
                               <TextField fx:id="txtUsername" layoutX="120.0" layoutY="65.0" onInputMethodTextChanged="#Validated" onKeyReleased="#Validated" prefHeight="26.0" prefWidth="300.0" promptText="Enter username" />
-                              <Label fx:id="errorUsername" layoutX="120.0" layoutY="90.0" styleClass="error" text="Cannot be null and less than 64 character!" />
+                              <Label fx:id="errorUsername" layoutX="120.0" layoutY="90.0" styleClass="error" text="Cannot be null and less than 64 character!" visible="false" />
                               <Label layoutX="40.0" layoutY="115.0" text="Password">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="txtPassword" layoutX="120.0" layoutY="110.0" onKeyReleased="#Validated" onMouseClicked="#checkFocusPassword" prefHeight="26.0" prefWidth="300.0" promptText="Enter a password" />
-                              <Label fx:id="errorPassword" layoutX="120.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="error" text="Have at least one digit or lower case letter, 8-20 words" wrapText="true" />
+                              <Label fx:id="errorPassword" layoutX="120.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="error" text="Have at least one digit or lower case letter, 8-20 words" visible="false" wrapText="true" />
                               <Label layoutX="40.0" layoutY="160.0" text="Full Name">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="txtFullname" layoutX="120.0" layoutY="155.0" onKeyReleased="#Validated" prefHeight="26.0" prefWidth="300.0" promptText="Enter a fullname" />
-                              <Label fx:id="errorFullname" layoutX="131.0" layoutY="213.0" styleClass="error" text="Cannot be null and less than 64 character!" visible="false">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
+                              <Label fx:id="errorFullname" layoutX="120.0" layoutY="180.0" styleClass="error" text="Cannot be null and less than 64 character!" visible="false" />
                               <Label layoutX="40.0" layoutY="205.0" text="Gender">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                               </Label>
                               <ComboBox fx:id="boxGender" layoutX="120.0" layoutY="200.0" onAction="#Validated" prefHeight="26.0" prefWidth="300.0" promptText="Please choose a gender!" styleClass="combo-box" />
-                              <Label fx:id="errorGender" layoutX="120.0" layoutY="270.0" styleClass="error" text="Select your gender!" visible="false" />
+                              <Label fx:id="errorGender" layoutX="120.0" layoutY="225.0" styleClass="error" text="Select your gender!" visible="false" />
                               <Label layoutX="40.0" layoutY="250.0" text="Role">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                               </Label>
                               <ComboBox fx:id="boxRole" layoutX="120.0" layoutY="245.0" onAction="#Validated" prefHeight="26.0" prefWidth="300.0" promptText="Please choose a Role!" styleClass="combo-box" />
-                              <Label fx:id="errorRole" layoutX="120.0" layoutY="270.0" styleClass="error" text="Select a role!" visible="false">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
+                              <Label fx:id="errorRole" layoutX="120.0" layoutY="270.0" styleClass="error" text="Select a role!" visible="false" />
                               <Label layoutX="460.0" layoutY="25.0" text="Email">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="txtEmail" layoutX="570.0" layoutY="20.0" onInputMethodTextChanged="#Validated" onKeyReleased="#Validated" prefHeight="26.0" prefWidth="300.0" promptText="Enter a  email" />
-                              <Label fx:id="errorEmail" layoutX="570.0" layoutY="49.0" styleClass="error" text="Cannot valid email!" visible="false">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
+                              <Label fx:id="errorEmail" layoutX="570.0" layoutY="45.0" styleClass="error" text="Email is not valid" visible="false" />
                               <Label layoutX="460.0" layoutY="70.0" text="Birthday">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                               </Label>
                               <DatePicker fx:id="txtDob" editable="false" layoutX="570.0" layoutY="65.0" onAction="#Validated" prefHeight="26.0" prefWidth="300.0" promptText="Pick a date!" style="-fx-background-color: transparent;" />
-                              <Label fx:id="errorDob" layoutX="570.0" layoutY="99.0" styleClass="error" text="Pick a date!" visible="false">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
+                              <Label fx:id="errorDob" layoutX="570.0" layoutY="90.0" styleClass="error" text="Pick your birthdate!" visible="false" />
                               <Label layoutX="460.0" layoutY="115.0" text="Phone number">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="txtMobile" layoutX="570.0" layoutY="110.0" onInputMethodTextChanged="#Validated" onKeyReleased="#Validated" prefHeight="26.0" prefWidth="300.0" promptText="Enter your phone number" />
-                              <Label fx:id="errorMobile" layoutX="570.0" layoutY="149.0" styleClass="error" text="Cannot be null and  have 10 number!" visible="false">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
+                              <Label fx:id="errorMobile" layoutX="570.0" layoutY="135.0" styleClass="error" text="Cannot be null and  have 10 number!" visible="false" />
                               <Label layoutX="460.0" layoutY="160.0" text="Created At">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
