@@ -1,0 +1,40 @@
+@startuml
+start
+:Validate input;
+:Retrieve publisher details;
+if (id is empty?) then (Yes)
+    if (Publishing with name exists?) then (Yes)
+        :Show error "This Publishing exists!";
+    else (No)
+        :Add new Publishing;
+        if (Add success?) then (Yes)
+            :Show success alert;
+        else (No)
+            :Show error "Add failed!";
+        endif
+    endif
+else (No)
+    :Set publisher ID;
+    if (Publisher name matches existing?) then (Yes)
+        :Update existing Publishing;
+        if (Update success?) then (Yes)
+            :Show success alert;
+        else (No)
+            :Show error "Update failed!";
+        endif
+    else (No)
+        if (Publishing with name exists?) then (Yes)
+            :Show error "This Publishing exists!";
+        else (No)
+            :Update Publishing;
+            if (Update success?) then (Yes)
+                :Show success alert;
+            else (No)
+                :Show error "Update failed!";
+            endif
+        endif
+    endif
+endif
+:Refresh UI data;
+stop
+@enduml

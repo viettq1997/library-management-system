@@ -1,0 +1,40 @@
+@startuml
+start
+:Retrieve inputs (id, name, signName, dob);
+:Create an Author object with the input data;
+
+if (id is empty?) then (Yes)
+    if (Author with the same signName exists?) then (No)
+        if (Add new Author is successful?) then (Yes)
+            :Show success message: "Added Successfully!";
+        else (No)
+            :Show error message: "Added Fail!";
+        endif
+    else (Yes)
+        :Show error message: "This Author exists!";
+    endif
+else (No)
+    :Set Author ID;
+
+    if (Author's name matches the existing name?) then (Yes)
+        if (Update Author is successful?) then (Yes)
+            :Show success message: "Updated Successfully!";
+        else (No)
+            :Show error message: "Updated Fail!";
+        endif
+    else (No)
+        if (Author with the same signName exists?) then (No)
+            if (Update Author is successful?) then (Yes)
+                :Show success message: "Updated Successfully!";
+            else (No)
+                :Show error message: "Updated Fail!";
+            endif
+        else (Yes)
+            :Show error message: "This Author exists!";
+        endif
+    endif
+endif
+
+:Refresh the data display;
+stop
+@enduml

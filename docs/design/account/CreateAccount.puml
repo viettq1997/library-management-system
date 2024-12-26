@@ -1,0 +1,35 @@
+@startuml
+start
+:Format the full name;
+:Read all input fields: UID, password, username, full name, gender, role, email, date of birth, mobile, and avatar image name;
+:Prepare a message box for later;
+
+if (UID is empty?) then (Yes)
+    if (Username already exists?) then (Yes)
+        :Show a message: "This username exists!";
+        stop
+    else (No)
+        :Generate a new UID;
+        :Create a new account with the input details;
+        if (Account is added successfully?) then (Yes)
+            :Show a success message: "Added Successfully!";
+        else (No)
+            :Show an error message: "Added Fail!";
+        endif
+    endif
+else (No)
+    :Retrieve the existing account by UID;
+    :Update the account with the new details;
+    if (Account is updated successfully?) then (Yes)
+        if (UID matches the updated account's UID?) then (Yes)
+            :Update the session username;
+        endif
+        :Show a success message: "Updated Successfully!";
+    else (No)
+        :Show an error message: "Updated Fail!";
+    endif
+endif
+
+:Refresh data on the page;
+stop
+@enduml

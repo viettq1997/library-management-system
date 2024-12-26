@@ -1,0 +1,16 @@
+@startuml
+start
+:Retrieve book ID from UI;
+:Parse book ID as integer;
+if (Delete ManageBook entry?) then (Yes)
+    if (Delete Book entry?) then (Yes)
+        :Show success alert;
+    else (No)
+        :Show Book delete failure alert;
+    endif
+else (No)
+    :Show ManageBook delete failure alert;
+endif
+:Refresh UI data;
+stop
+@enduml

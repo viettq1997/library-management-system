@@ -1,0 +1,106 @@
+@startuml
+skinparam height 100%
+skinparam dpi 200
+
+entity ROLES {
+  id <<key>>
+  name
+}
+
+entity ACCOUNTS {
+  id <<key>>
+  UID
+  avatar
+  username
+  password
+  full_name
+  gender
+  email
+  dob
+  mobile
+  status
+  roleId
+  createdAt
+  updatedAt
+}
+
+entity CATEGORIES {
+  id <<key>>
+  name
+  createdAt
+  updatedAt
+}
+
+entity AUTHORS {
+  id <<key>>
+  name
+  dob
+  sign_name
+  createdAt
+  updatedAt
+}
+
+entity PUBLISHING {
+  id <<key>>
+  name
+  address
+  co_year
+  createdAt
+  updatedAt
+}
+
+entity BOOKS {
+  id <<key>>
+  name
+  image
+  co_year
+  price
+  quantity
+  description
+  categoryId
+  authorId
+  publishId
+}
+
+entity STATUS_MANAGE {
+  id <<key>>
+  name
+}
+
+entity STATUS_BORROW {
+  id <<key>>
+  name
+}
+
+entity MANAGE_BOOK {
+  id <<key>>
+  price_per_book
+  accountId
+  bookId
+  statusId
+  createdAt
+  updatedAt
+}
+
+entity BORROW {
+  id <<key>>
+  borrowAt
+  refundAt
+  amount_of_pay
+  manageId
+  statusId
+  accountId
+}
+
+ACCOUNTS --|> ROLES : HAS_ROLE
+BOOKS --|> CATEGORIES : HAS_CATEGORY
+BOOKS --|> AUTHORS : HAS_AUTHOR
+BOOKS --|> PUBLISHING : HAS_PUBLISHER
+MANAGE_BOOK --|> ACCOUNTS : MANAGES_BOOK
+MANAGE_BOOK --|> STATUS_MANAGE : MANAGES_BOOK
+MANAGE_BOOK --|> BOOKS : MANAGES_BOOK
+BORROW --|> MANAGE_BOOK : BORROWS_BOOK
+BORROW --|> STATUS_BORROW : BORROWS_BOOK
+BORROW --|> ACCOUNTS : BORROWS_BOOK
+
+@enduml
