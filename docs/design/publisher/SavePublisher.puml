@@ -1,40 +1,47 @@
 @startuml
-start
-:Validate input;
-:Retrieve publisher details;
-if (id is empty?) then (Yes)
-    if (Publishing with name exists?) then (Yes)
-        :Show error "This Publishing exists!";
-    else (No)
-        :Add new Publishing;
-        if (Add success?) then (Yes)
-            :Show success alert;
-        else (No)
-            :Show error "Add failed!";
-        endif
-    endif
-else (No)
-    :Set publisher ID;
-    if (Publisher name matches existing?) then (Yes)
-        :Update existing Publishing;
-        if (Update success?) then (Yes)
-            :Show success alert;
-        else (No)
-            :Show error "Update failed!";
-        endif
-    else (No)
-        if (Publishing with name exists?) then (Yes)
-            :Show error "This Publishing exists!";
-        else (No)
-            :Update Publishing;
-            if (Update success?) then (Yes)
-                :Show success alert;
-            else (No)
-                :Show error "Update failed!";
-            endif
-        endif
-    endif
-endif
-:Refresh UI data;
-stop
+actor User
+participant "System" as System
+participant "Database" as DB
+
+User -> System: Validate input
+System -> DB: Retrieve publisher details
+
+alt id is empty
+  System -> DB: Check if Publishing with name exists
+  alt Publishing exists
+    System -> User: Show error "This Publishing exists!"
+  else
+    System -> DB: Add new Publishing
+    alt Add success
+      System -> User: Show success alert
+    else
+      System -> User: Show error "Add failed!"
+    end
+  end
+else
+  System -> System: Set publisher ID
+  System -> DB: Check if Publisher name matches existing
+  alt Name matches
+    System -> DB: Update existing Publishing
+    alt Update success
+      System -> User: Show success alert
+    else
+      System -> User: Show error "Update failed!"
+    end
+  else
+    System -> DB: Check if Publishing with name exists
+    alt Publishing exists
+      System -> User: Show error "This Publishing exists!"
+    else
+      System -> DB: Update Publishing
+      alt Update success
+        System -> User: Show success alert
+      else
+        System -> User: Show error "Update failed!"
+      end
+    end
+  end
+end
+
+System -> User: Refresh UI data
 @enduml

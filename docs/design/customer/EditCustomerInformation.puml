@@ -1,28 +1,31 @@
 @startuml
-start
-:Fetch current account details;
-:Get updated information from UI;
+actor User
+participant "System" as System
+participant "Database" as DB
 
-if (Username changed?) then (Yes)
-    if (New username exists?) then (Yes)
-        :Show error message: "Username exists!";
-    else (No)
-        :Prompt password confirmation;
-        if (Password confirmed?) then (Yes)
-            :Update account;
-            :Update session and switch to customer info;
-        else (No)
-            :Cancel operation;
-        endif
-    endif
-else (No)
-    :Prompt password confirmation;
-    if (Password confirmed?) then (Yes)
-        :Update account;
-        :Update session and switch to customer info;
-    else (No)
-        :Cancel operation;
-    endif
-endif
-stop
+User -> System: Fetch current account details
+User -> System: Get updated information from UI
+
+alt Username changed
+  System -> DB: Check if new username exists
+  alt New username exists
+    System -> User: Show error message: "Username exists!"
+  else
+    System -> User: Prompt password confirmation
+    alt Password confirmed
+      System -> DB: Update account
+      System -> System: Update session and switch to customer info
+    else
+      System -> System: Cancel operation
+    end
+  end
+else
+  System -> User: Prompt password confirmation
+  alt Password confirmed
+    System -> DB: Update account
+    System -> System: Update session and switch to customer info
+  else
+    System -> System: Cancel operation
+  end
+end
 @enduml

@@ -1,14 +1,17 @@
 @startuml
-start
-:Read the UID from the input field;
-:Prepare a message box;
+actor User
+participant "System" as System
+participant "Database" as DB
 
-if (Delete account by UID is successful?) then (Yes)
-    :Show a success message: "Unactived Successfully!";
-else (No)
-    :Show an error message: "Unactived Fail!";
-endif
+User -> System: Read the UID from the input field
+System -> System: Prepare a message box
 
-:Refresh the data on the page;
-stop
+System -> DB: Delete account by UID
+alt Delete successful
+  System -> User: Show a success message: "Unactived Successfully!"
+else
+  System -> User: Show an error message: "Unactived Fail!"
+end
+
+System -> User: Refresh the data on the page
 @enduml

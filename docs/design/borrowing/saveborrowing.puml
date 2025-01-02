@@ -1,37 +1,37 @@
 @startuml
-start
+actor User
+participant "System" as System
+participant "Database" as DB
 
-:Validated();
-:Check if txtID is Empty;
+User -> System: Validated()
+System -> System: Check if txtID is Empty
 
-if (txtID is Empty?) then (yes)
-  :Retrieve Account ID;
-  :Retrieve Book ID;
-  :Retrieve Status ID;
-  :Create Borrow Object;
-  :Set RefundAt and BorrowAt for Borrow Object;
-  :Add Borrow to BorrowEntity;
-  if (Add Success?) then (yes)
-    :Show alert "Added Successfully!";
-  else (no)
-    :Show alert "Added Fail!";
-  endif
-else (no)
-  :Retrieve Account ID;
-  :Retrieve Book ID;
-  :Retrieve Status ID;
-  :Retrieve Manage ID and ID from Table;
-  :Create Borrow Object;
-  :Set ID, RefundAt, BorrowAt, StatusId, ManageId, AccountID, BookID for Borrow Object;
-  :Update Borrow in BorrowEntity;
-  if (Update Success?) then (yes)
-    :Show alert "Updated Successfully!";
-  else (no)
-    :Show alert "Updated Fail!";
-  endif
-endif
+alt txtID is Empty
+  System -> DB: Retrieve Account ID
+  System -> DB: Retrieve Book ID
+  System -> DB: Retrieve Status ID
+  System -> System: Create Borrow Object
+  System -> System: Set RefundAt and BorrowAt for Borrow Object
+  System -> DB: Add Borrow to BorrowEntity
+  alt Add Success
+    System -> User: Show alert "Added Successfully!"
+  else
+    System -> User: Show alert "Added Fail!"
+  end
+else
+  System -> DB: Retrieve Account ID
+  System -> DB: Retrieve Book ID
+  System -> DB: Retrieve Status ID
+  System -> DB: Retrieve Manage ID and ID from Table
+  System -> System: Create Borrow Object
+  System -> System: Set ID, RefundAt, BorrowAt, StatusId, ManageId, AccountID, BookID for Borrow Object
+  System -> DB: Update Borrow in BorrowEntity
+  alt Update Success
+    System -> User: Show alert "Updated Successfully!"
+  else
+    System -> User: Show alert "Updated Fail!"
+  end
+end
 
-:Refresh UI;
-stop
-
+System -> User: Refresh UI
 @enduml

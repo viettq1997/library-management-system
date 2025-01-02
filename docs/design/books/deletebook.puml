@@ -1,16 +1,24 @@
 @startuml
-start
-:Retrieve book ID from UI;
-:Parse book ID as integer;
-if (Delete ManageBook entry?) then (Yes)
-    if (Delete Book entry?) then (Yes)
-        :Show success alert;
-    else (No)
-        :Show Book delete failure alert;
-    endif
-else (No)
-    :Show ManageBook delete failure alert;
-endif
-:Refresh UI data;
-stop
+actor User
+participant "System" as System
+participant "Database" as DB
+
+User -> System: Retrieve book ID from UI
+System -> System: Parse book ID as integer
+
+alt Delete ManageBook entry
+  System -> DB: Delete ManageBook entry
+  alt Delete successful
+    System -> DB: Delete Book entry
+    alt Delete successful
+      System -> User: Show success alert
+    else
+      System -> User: Show Book delete failure alert
+    end
+  else
+    System -> User: Show ManageBook delete failure alert
+  end
+end
+
+System -> User: Refresh UI data
 @enduml

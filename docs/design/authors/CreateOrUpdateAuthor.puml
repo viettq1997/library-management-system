@@ -1,40 +1,47 @@
 @startuml
-start
-:Retrieve inputs (id, name, signName, dob);
-:Create an Author object with the input data;
+actor User
+participant "System" as System
+participant "Database" as DB
 
-if (id is empty?) then (Yes)
-    if (Author with the same signName exists?) then (No)
-        if (Add new Author is successful?) then (Yes)
-            :Show success message: "Added Successfully!";
-        else (No)
-            :Show error message: "Added Fail!";
-        endif
-    else (Yes)
-        :Show error message: "This Author exists!";
-    endif
-else (No)
-    :Set Author ID;
+User -> System: Retrieve inputs (id, name, signName, dob)
+System -> System: Create an Author object with the input data
 
-    if (Author's name matches the existing name?) then (Yes)
-        if (Update Author is successful?) then (Yes)
-            :Show success message: "Updated Successfully!";
-        else (No)
-            :Show error message: "Updated Fail!";
-        endif
-    else (No)
-        if (Author with the same signName exists?) then (No)
-            if (Update Author is successful?) then (Yes)
-                :Show success message: "Updated Successfully!";
-            else (No)
-                :Show error message: "Updated Fail!";
-            endif
-        else (Yes)
-            :Show error message: "This Author exists!";
-        endif
-    endif
-endif
+alt id is empty
+  System -> DB: Check if Author with the same signName exists
+  alt Author exists
+    System -> User: Show error message: "This Author exists!"
+  else
+    System -> DB: Add new Author
+    alt Add successful
+      System -> User: Show success message: "Added Successfully!"
+    else
+      System -> User: Show error message: "Added Fail!"
+    end
+  end
+else
+  System -> System: Set Author ID
+  System -> DB: Check if Author's name matches the existing name
+  alt Name matches
+    System -> DB: Update Author
+    alt Update successful
+      System -> User: Show success message: "Updated Successfully!"
+    else
+      System -> User: Show error message: "Updated Fail!"
+    end
+  else
+    System -> DB: Check if Author with the same signName exists
+    alt Author exists
+      System -> User: Show error message: "This Author exists!"
+    else
+      System -> DB: Update Author
+      alt Update successful
+        System -> User: Show success message: "Updated Successfully!"
+      else
+        System -> User: Show error message: "Updated Fail!"
+      end
+    end
+  end
+end
 
-:Refresh the data display;
-stop
+System -> User: Refresh the data display
 @enduml

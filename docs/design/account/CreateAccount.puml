@@ -1,35 +1,37 @@
 @startuml
-start
-:Format the full name;
-:Read all input fields: UID, password, username, full name, gender, role, email, date of birth, mobile, and avatar image name;
-:Prepare a message box for later;
+actor User
+participant "System" as System
+participant "Database" as DB
 
-if (UID is empty?) then (Yes)
-    if (Username already exists?) then (Yes)
-        :Show a message: "This username exists!";
-        stop
-    else (No)
-        :Generate a new UID;
-        :Create a new account with the input details;
-        if (Account is added successfully?) then (Yes)
-            :Show a success message: "Added Successfully!";
-        else (No)
-            :Show an error message: "Added Fail!";
-        endif
-    endif
-else (No)
-    :Retrieve the existing account by UID;
-    :Update the account with the new details;
-    if (Account is updated successfully?) then (Yes)
-        if (UID matches the updated account's UID?) then (Yes)
-            :Update the session username;
-        endif
-        :Show a success message: "Updated Successfully!";
-    else (No)
-        :Show an error message: "Updated Fail!";
-    endif
-endif
+User -> System: Format the full name
+User -> System: Read all input fields: UID, password, username, full name, gender, role, email, date of birth, mobile, and avatar image name
+System -> System: Prepare a message box for later
 
-:Refresh data on the page;
-stop
+alt UID is empty
+  System -> DB: Check if Username already exists
+  alt Username exists
+    System -> User: Show a message: "This username exists!"
+  else
+    System -> System: Generate a new UID
+    System -> DB: Create a new account with the input details
+    alt Account added successfully
+      System -> User: Show a success message: "Added Successfully!"
+    else
+      System -> User: Show an error message: "Added Fail!"
+    end
+  end
+else
+  System -> DB: Retrieve the existing account by UID
+  System -> DB: Update the account with the new details
+  alt Account updated successfully
+    alt UID matches the updated account's UID
+      System -> System: Update the session username
+    end
+    System -> User: Show a success message: "Updated Successfully!"
+  else
+    System -> User: Show an error message: "Updated Fail!"
+  end
+end
+
+System -> User: Refresh data on the page
 @enduml

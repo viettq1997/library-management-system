@@ -1,21 +1,21 @@
 @startuml
-start
+actor User
+participant "System" as System
+participant "Database" as DB
 
-:Click Delete Button;
-:Retrieve books by Publisher ID;
-if (Books Exist?) then (yes)
-  :Show alert "This publisher has books! Delete books first";
-  stop
-else (no)
-  :Attempt to delete Publisher;
-  if (Delete Success?) then (yes)
-    :Show alert "Deleted Successfully!";
-  else (no)
-    :Show alert "Delete Failed!";
-  endif
-endif
+User -> System: Click Delete Button
+System -> DB: Retrieve books by Publisher ID
 
-:Refresh UI;
-stop
+alt Books Exist
+  System -> User: Show alert "This publisher has books! Delete books first"
+else
+  System -> DB: Attempt to delete Publisher
+  alt Delete Success
+    System -> User: Show alert "Deleted Successfully!"
+  else
+    System -> User: Show alert "Delete Failed!"
+  end
+end
 
+System -> User: Refresh UI
 @enduml

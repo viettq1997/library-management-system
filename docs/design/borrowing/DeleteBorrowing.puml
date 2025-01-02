@@ -1,18 +1,17 @@
 @startuml
-start
+actor User
+participant "System" as System
+participant "Database" as DB
 
-:Retrieve ID from txtID;
-:Create Alert Object;
+User -> System: Retrieve ID from txtID
+System -> System: Create Alert Object
+System -> DB: Delete Borrow Entity with ID
 
-:Delete Borrow Entity with ID;
+alt Delete Success
+  System -> User: Show alert "Deleted Successfully!"
+else
+  System -> User: Show alert "Deleted Fail!"
+end
 
-if (Delete Success?) then (yes)
-  :Show alert "Deleted Successfully!";
-else (no)
-  :Show alert "Deleted Fail!";
-endif
-
-:Refresh UI;
-stop
-
+System -> User: Refresh UI
 @enduml

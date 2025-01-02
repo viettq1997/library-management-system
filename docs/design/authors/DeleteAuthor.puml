@@ -1,18 +1,21 @@
 @startuml
-start
-:Retrieve Author ID from input;
-:Fetch books associated with Author ID;
+actor User
+participant "System" as System
+participant "Database" as DB
 
-if (Author has no books?) then (Yes)
-    if (Delete Author successful?) then (Yes)
-        :Show success message: "Deleted Successfully!";
-    else (No)
-        :Show error message: "Deleted Fail!";
-    endif
-else (No)
-    :Show message: "This author has books! Delete books first.";
-endif
+User -> System: Retrieve Author ID from input
+System -> DB: Fetch books associated with Author ID
 
-:Refresh data display;
-stop
+alt Author has no books
+  System -> DB: Delete Author
+  alt Delete successful
+    System -> User: Show success message: "Deleted Successfully!"
+  else
+    System -> User: Show error message: "Deleted Fail!"
+  end
+else
+  System -> User: Show message: "This author has books! Delete books first."
+end
+
+System -> User: Refresh data display
 @enduml

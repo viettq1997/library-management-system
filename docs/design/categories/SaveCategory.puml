@@ -1,50 +1,48 @@
 @startuml
-start
+actor User
+participant "System" as System
+participant "Database" as DB
 
-:Format Input Name;
-:Retrieve Input ID and Name;
-:Create Category with Name;
+User -> System: Format Input Name
+User -> System: Retrieve Input ID and Name
+User -> System: Create Category with Name
 
-if (ID is empty?) then (yes)
-  :Check if Category Name exists;
-  if (Category Exists?) then (yes)
-    :Show alert "This Category exists!";
-    stop
-  else (no)
-    :Attempt to Add Category;
-    if (Add Success?) then (yes)
-      :Show alert "Added Successfully!";
-    else (no)
-      :Show alert "Added Fail!";
-    endif
-  endif
-else (no)
-  :Set Category ID;
-  :Check if Category Name has changed;
-  if (Name Changed?) then (yes)
-    :Check if Category Name exists;
-    if (Category Exists?) then (yes)
-      :Show alert "This Category exists!";
-      stop
-    else (no)
-      :Attempt to Update Category;
-      if (Update Success?) then (yes)
-        :Show alert "Updated Successfully!";
-      else (no)
-        :Show alert "Updated Fail!";
-      endif
-    endif
-  else (no)
-    :Attempt to Update Category;
-    if (Update Success?) then (yes)
-      :Show alert "Updated Successfully!";
-    else (no)
-      :Show alert "Updated Fail!";
-    endif
-  endif
-endif
+alt ID is empty
+  System -> DB: Check if Category Name exists
+  alt Category Exists
+    System -> User: Show alert "This Category exists!"
+  else
+    System -> DB: Attempt to Add Category
+    alt Add Success
+      System -> User: Show alert "Added Successfully!"
+    else
+      System -> User: Show alert "Added Fail!"
+    end
+  end
+else
+  System -> System: Set Category ID
+  System -> System: Check if Category Name has changed
+  alt Name Changed
+    System -> DB: Check if Category Name exists
+    alt Category Exists
+      System -> User: Show alert "This Category exists!"
+    else
+      System -> DB: Attempt to Update Category
+      alt Update Success
+        System -> User: Show alert "Updated Successfully!"
+      else
+        System -> User: Show alert "Updated Fail!"
+      end
+    end
+  else
+    System -> DB: Attempt to Update Category
+    alt Update Success
+      System -> User: Show alert "Updated Successfully!"
+    else
+      System -> User: Show alert "Updated Fail!"
+    end
+  end
+end
 
-:Refresh UI;
-stop
-
+System -> User: Refresh UI
 @enduml

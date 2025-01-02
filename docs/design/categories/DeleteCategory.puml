@@ -1,22 +1,21 @@
 @startuml
-start
+actor User
+participant "System" as System
+participant "Database" as DB
 
-:Retrieve Category ID;
-:Check if Books Exist for Category;
+User -> System: Retrieve Category ID
+System -> DB: Check if Books Exist for Category
 
-if (Books Exist?) then (yes)
-  :Show alert "This category have books! Delete books of category";
-  stop
-else (no)
-  :Attempt to Delete Category;
-  if (Delete Success?) then (yes)
-    :Show alert "Deleted Successfully!";
-  else (no)
-    :Show alert "Deleted Fail!";
-  endif
-endif
+alt Books Exist
+  System -> User: Show alert "This category has books! Delete books of category"
+else
+  System -> DB: Attempt to Delete Category
+  alt Delete Success
+    System -> User: Show alert "Deleted Successfully!"
+  else
+    System -> User: Show alert "Deleted Fail!"
+  end
+end
 
-:Refresh UI;
-stop
-
+System -> User: Refresh UI
 @enduml

@@ -1,34 +1,38 @@
 @startuml
-start
-:Retrieve data from UI;
-if (bookId is empty?) then (Yes)
-    :Validate book name for duplicates;
-    if (No duplicates?) then (Yes)
-        :Add book to database;
-        :Retrieve new book ID;
-        :Create ManageBook entry;
-        if (Success?) then (Yes)
-            :Show success alert;
-        else (No)
-            :Show failure alert;
-        endif
-    else (No)
-        :Show duplicate book error;
-    endif
-else (No)
-    :Validate book name if changed;
-    if (No duplicates?) then (Yes)
-        :Update book details;
-        :Update ManageBook entry;
-        if (Success?) then (Yes)
-            :Show success alert;
-        else (No)
-            :Show failure alert;
-        endif
-    else (No)
-        :Show duplicate book error;
-    endif
-endif
-:Refresh data in UI;
-stop
+actor User
+participant "System" as System
+participant "Database" as DB
+
+User -> System: Retrieve data from UI
+
+alt bookId is empty
+  System -> DB: Validate book name for duplicates
+  alt No duplicates
+    System -> DB: Add book to database
+    System -> DB: Retrieve new book ID
+    System -> DB: Create ManageBook entry
+    alt Success
+      System -> User: Show success alert
+    else
+      System -> User: Show failure alert
+    end
+  else
+    System -> User: Show duplicate book error
+  end
+else
+  System -> DB: Validate book name if changed
+  alt No duplicates
+    System -> DB: Update book details
+    System -> DB: Update ManageBook entry
+    alt Success
+      System -> User: Show success alert
+    else
+      System -> User: Show failure alert
+    end
+  else
+    System -> User: Show duplicate book error
+  end
+end
+
+System -> User: Refresh data in UI
 @enduml
