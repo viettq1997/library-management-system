@@ -1,35 +1,35 @@
 @startuml
-start
-:Read the username that the user typed;
-:Read the password. Check if the hidden password box has more characters than the visible one;
+actor User
+participant "System" as System
+participant "Database" as DB
 
-if (The hidden password is longer?) then (Yes)
-    :Use the hidden password;
-else (No)
-    :Use the visible password;
-endif
+User -> System: Read the username that the user typed
+User -> System: Read the password. Check if the hidden password box has more characters than the visible one
 
-:Prepare a message box for later;
-:Find the account that matches the username;
+alt The hidden password is longer
+  System -> System: Use the hidden password
+else
+  System -> System: Use the visible password
+end
 
-if (An account is found?) then (Yes)
-    :Get the stored password and role of the account;
-    if (The entered password matches the stored one?) then (Yes)
-        :Remember this user has logged in;
+System -> System: Prepare a message box for later
+System -> DB: Find the account that matches the username
 
-        if (The user is an Admin?) then (Yes)
-            :Show a welcome message with the username;
-            :Take the user to the Admin's area;
-        else (The user is a Reader)
-            :Show a welcome message with the full name;
-            :Take the user to the Reader's area;
-        endif
-    else (No)
-        :Show a message saying the username or password is wrong;
-    endif
-else (No)
-    :Show a message saying the username or password is wrong;
-endif
-
-stop
+alt An account is found
+  System -> DB: Get the stored password and role of the account
+  alt The entered password matches the stored one
+    System -> System: Remember this user has logged in
+    alt The user is an Admin
+      System -> User: Show a welcome message with the username
+      System -> User: Take the user to the Admin's area
+    else The user is a Reader
+      System -> User: Show a welcome message with the full name
+      System -> User: Take the user to the Reader's area
+    end
+  else
+    System -> User: Show a message saying the username or password is wrong
+  end
+else
+  System -> User: Show a message saying the username or password is wrong
+end
 @enduml

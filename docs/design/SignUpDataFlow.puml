@@ -1,23 +1,27 @@
 @startuml
-start
-:Assign default role as Reader;
-:Generate a unique ID;
-:Read username, password (hidden or visible), fullname, gender, and mobile number;
-:Choose the correct password field to use;
+actor User
+participant "System" as System
+participant "Database" as DB
 
-:Create a new account object with all the details;
-:Prepare a message box for later;
+User -> System: Assign default role as Reader
+System -> System: Generate a unique ID
+User -> System: Read username, password (hidden or visible), fullname, gender, and mobile number
+System -> System: Choose the correct password field to use
 
-if (Username is already taken?) then (Yes)
-    :Show a message that the username is already taken;
-    stop
-else (No)
-    if (Account creation is successful?) then (Yes)
-        :Remember this user has signed up;
-        :Show a success message;
-        :Take the user to the login screen;
-    else (No)
-        :Show a failure message;
-    endif
-stop
+System -> System: Create a new account object with all the details
+System -> System: Prepare a message box for later
+
+System -> DB: Check if username is already taken
+alt Username is already taken
+  System -> User: Show a message that the username is already taken
+else
+  System -> DB: Create a new account
+  alt Account creation is successful
+    System -> System: Remember this user has signed up
+    System -> User: Show a success message
+    System -> User: Take the user to the login screen
+  else
+    System -> User: Show a failure message
+  end
+end
 @enduml
