@@ -256,7 +256,7 @@ public class ManagementBorrowingController implements Initializable {
 
     @FXML
     public void table() {
-        if (txtSearch.getText().equals("")) {
+        if (txtSearch.getText().isEmpty()) {
             ObservableList<Borrow> borrow = BorrowEntity.GetAll();
             table.setItems(borrow);
         } else {

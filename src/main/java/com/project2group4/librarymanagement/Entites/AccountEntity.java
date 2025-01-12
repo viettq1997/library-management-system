@@ -198,14 +198,14 @@ public class AccountEntity {
         return null;
     }
 
-    public static ObservableList<Account> SearchByUID(String UID) {
+    public static ObservableList<Account> SearchByUsername(String username) {
         ObservableList<Account> list = FXCollections.observableArrayList();
-        String sql = "SELECT accounts.*, roles.name as roleName FROM accounts JOIN roles ON accounts.roleId = roles.id WHERE accounts.UID like ? AND accounts.status = ?";
+        String sql = "SELECT accounts.*, roles.name as roleName FROM accounts JOIN roles ON accounts.roleId = roles.id WHERE accounts.username like ? AND accounts.status = ?";
 
         try {
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, "%" + UID + "%");
+            preparedStatement.setString(1, "%" + username + "%");
             preparedStatement.setInt(2, 1);
             rs = preparedStatement.executeQuery();
 

@@ -128,15 +128,15 @@ public class AuthorEntity {
         return null;
     }
 
-    public static ObservableList<Author> SearchBySignName(String sign_name) {
+    public static ObservableList<Author> SearchByName(String name) {
         ObservableList<Author> list = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM authors WHERE sign_name like ?";
+        String sql = "SELECT * FROM authors WHERE name like ?";
 
         try {
             connection = JDBCConnect.getJDBCConnection();
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, "%" + sign_name + "%");
+            preparedStatement.setString(1, "%" + name + "%");
             rs = preparedStatement.executeQuery();
 
             for (int i = 1; rs.next(); i++) {

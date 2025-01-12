@@ -209,7 +209,7 @@ public class ManagementAuthorsController implements Initializable {
     @FXML
     public void Search() {
         String search = txtSearch.getText();
-        ObservableList<Author> authors = AuthorEntity.SearchBySignName(search);
+        ObservableList<Author> authors = AuthorEntity.SearchByName(search);
 
         table(authors);
     }

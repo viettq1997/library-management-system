@@ -17,13 +17,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
-import org.apache.commons.codec.digest.DigestUtils;
 
 public class ManagementAccountsController implements Initializable {
 
@@ -334,7 +331,7 @@ public class ManagementAccountsController implements Initializable {
     @FXML
     public void Search() {
         String search = txtSearch.getText();
-        ObservableList<Account> accounts = AccountEntity.SearchByUID(search);
+        ObservableList<Account> accounts = AccountEntity.SearchByUsername(search);
 
         table.setItems(accounts);
         colIndex.setCellValueFactory(f -> f.getValue().indexProperty().asString());

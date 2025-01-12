@@ -97,10 +97,11 @@ public class BorrowEntity {
         return null;
     }
     
-    public ObservableList<Borrow> SearchBorrowByAccountId(int accountId, String search) {
+    public ObservableList<Borrow> SearchBorrowByAccountIdAndBookName(int accountId, String search) {
         ObservableList<Borrow> list = FXCollections.observableArrayList();
         String query = "SELECT b.* "
                 + "FROM borrow AS b "
+                + "JOIN manage_book AS mb ON b.manageid = mb.id "
                 + "JOIN books ON mb.bookId = books.id "
                 + "WHERE b.accountId = ? AND books.name like ?";
 

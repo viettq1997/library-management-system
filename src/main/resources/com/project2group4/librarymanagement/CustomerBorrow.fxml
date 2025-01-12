@@ -195,9 +195,9 @@
                                  </font>
                               </Label>
                               <TextField fx:id="txtId" disable="true" layoutX="356.0" layoutY="2.0" visible="false" />
-                              <ComboBox fx:id="boxPublishing" layoutX="118.0" layoutY="27.0" onAction="#ValidatedFilter" prefWidth="300.0" promptText="Select a Publishing" />
-                              <ComboBox fx:id="boxAuthor" layoutX="118.0" layoutY="68.0" onAction="#ValidatedFilter" prefWidth="300.0" promptText="Select an Author" />
-                              <ComboBox fx:id="boxCategory" layoutX="528.0" layoutY="27.0" onAction="#ValidatedFilter" prefWidth="300.0" promptText="Select a Category" />
+                              <ComboBox fx:id="boxPublishing" disable="true" layoutX="118.0" layoutY="27.0" onAction="#ValidatedFilter" prefWidth="300.0" promptText="Select a Publishing" />
+                              <ComboBox fx:id="boxAuthor" disable="true" layoutX="118.0" layoutY="68.0" onAction="#ValidatedFilter" prefWidth="300.0" promptText="Select an Author" />
+                              <ComboBox fx:id="boxCategory" disable="true" layoutX="528.0" layoutY="27.0" onAction="#ValidatedFilter" prefWidth="300.0" promptText="Select a Category" />
                               <ComboBox fx:id="boxBook" disable="true" layoutX="528.0" layoutY="68.0" onAction="#ValidatedBook" prefWidth="300.0" promptText="Choose a Publishing, a Author and a Category!" />
                               <Label fx:id="errorBook" layoutX="568.0" layoutY="93.0" styleClass="error" text="Choose Publishing, Author and Category!" visible="false" />
                            </children>
@@ -231,22 +231,6 @@
                               <TextField fx:id="txtSearch" onKeyReleased="#Search" prefHeight="40.0" prefWidth="300.0" promptText="Search borrow books" style="-fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-background-radius: 2em;" />
                            </children>
                         </HBox>
-<!--                        <Button fx:id="btnBooking" onAction="#BtnBooking" disable="true" layoutX="755.0" layoutY="148.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="105.0" style="-fx-background-radius: 20px;" styleClass="button_success" text="Booking" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="148.0">-->
-<!--                           <font>-->
-<!--                              <Font size="14.0" />-->
-<!--                           </font>-->
-<!--                           <padding>-->
-<!--                              <Insets left="5.0" />-->
-<!--                           </padding>-->
-<!--                        </Button>-->
-<!--                        <ImageView disable="true" fitHeight="30.0" fitWidth="30.0" layoutX="750.0" layoutY="160.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="160.0">-->
-<!--                           <image>-->
-<!--                              <Image url="@../../../Icon/booking.png" />-->
-<!--                           </image>-->
-<!--                           <cursor>-->
-<!--                              <Cursor fx:constant="DEFAULT" />-->
-<!--                           </cursor>-->
-<!--                        </ImageView>-->
                      </children>
                   </AnchorPane>
                </center>

@@ -192,13 +192,12 @@ public class ManageBookEntity {
     }
 
     public static int CountPublishingInterestedByUID(String UID) {
-        String sql = "Select count(books.publishId) as countPublishers "
+        String sql = "Select count(distinct books.publishId) as countPublishers "
                 + "FROM  borrow AS bw "
                 + "JOIN accounts ON bw.accountId = accounts.id "
                 + "JOIN manage_book mb ON bw.manageid = mb.id "
                 + "JOIN books ON mb.bookId = books.id "
-                + "WHERE accounts.UID = ? "
-                + "GROUP BY books.publishId";
+                + "WHERE accounts.UID = ? ";
 
         try {
             connection = JDBCConnect.getJDBCConnection();
